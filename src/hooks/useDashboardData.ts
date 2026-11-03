@@ -17,7 +17,6 @@ export function useDashboardData() {
   const [loadStatus, setLoadStatus] = useState<LoadStatus>("loading");
   const [actionError, setActionError] = useState<string | null>(null);
   const [pendingTaskId, setPendingTaskId] = useState<string | null>(null);
-
   const [reloadToken, setReloadToken] = useState(0);
 
   useEffect(() => {
@@ -25,7 +24,7 @@ export function useDashboardData() {
     Promise.all([getTasks(), getMaterials(), getAnnouncements()])
       .then(([nextTasks, nextMaterials, nextAnnouncements]) => {
         if (cancelled) return;
-        setTasks(nextTasks);
+        setTasks(sortByDeadline(nextTasks));
         setMaterials(nextMaterials);
         setAnnouncements(nextAnnouncements);
         setLoadStatus("ready");
@@ -44,7 +43,7 @@ export function useDashboardData() {
   }, []);
 
   const addTask = useCallback((task: Task) => {
-    setTasks((prev) => sortByDeadline([...prev, task]));
+    setTasks((prev) => sortByDeadline([task, ...prev]));
   }, []);
 
   const moveTask = useCallback(async (id: string, status: TaskStatus) => {

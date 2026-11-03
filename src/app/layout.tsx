@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Space 3IA16",
+  title: "Space 3IA16 — Hub Kolaborasi Kelas",
   description:
-    "Kolaborasi kelas: tugas kelompok, materi kuliah, dan pengumuman dalam satu tempat.",
+    "Pusat kolaborasi kelas 3IA16: tugas kelompok, materi kuliah, dan pengumuman dalam satu tempat.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="id"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-zinc-950 text-zinc-100">
+      <body className="flex min-h-full flex-col bg-zinc-950 text-zinc-100 selection:bg-blue-500/30 selection:text-blue-200">
         <AppShell>{children}</AppShell>
       </body>
     </html>

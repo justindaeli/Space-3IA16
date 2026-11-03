@@ -2,6 +2,12 @@ export type TaskStatus = "todo" | "in-progress" | "done";
 
 export type MaterialType = "modul" | "slide" | "catatan";
 
+export interface User {
+  id: string;
+  name: string;
+  initials: string;
+}
+
 export interface Task {
   id: string;
   title: string;
@@ -9,6 +15,7 @@ export interface Task {
   course: string;
   deadline: string;
   status: TaskStatus;
+  assignee: User;
 }
 
 export interface Material {
@@ -16,8 +23,8 @@ export interface Material {
   title: string;
   course: string;
   type: MaterialType;
-  url: string | null;
   uploadedAt: string;
+  url: string | null;
 }
 
 export interface Announcement {
@@ -30,4 +37,28 @@ export interface QuickStats {
   activeTaskCount: number;
   nearestDeadline: string | null;
   latestAnnouncement: Announcement | null;
+}
+
+export interface StatCard {
+  label: string;
+  value: string;
+  description?: string;
+}
+
+export interface CreateTaskInput {
+  title: string;
+  description?: string;
+  course: string;
+  deadline: string;
+  status?: TaskStatus;
+}
+
+export interface SupabaseTaskRow {
+  id: string;
+  title: string;
+  course: string;
+  deadline: string;
+  status: string;
+  description?: string;
+  created_at?: string;
 }

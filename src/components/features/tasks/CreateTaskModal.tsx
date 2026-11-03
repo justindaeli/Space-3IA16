@@ -1,7 +1,10 @@
+"use client";
+
 import { useEffect, useState, type FormEvent } from "react";
 import { createTask } from "@/services/taskService";
 import { inputClass, primaryButtonClass, secondaryButtonClass } from "@/lib/ui-classes";
-import type { Task } from "@/types";
+import type { Task, CreateTaskInput } from "@/types";
+import { X } from "lucide-react";
 
 interface CreateTaskModalProps {
   isOpen: boolean;
@@ -9,24 +12,23 @@ interface CreateTaskModalProps {
   onTaskCreated: (task: Task) => void;
 }
 
-interface TaskFormState {
-  title: string;
-  course: string;
-  deadline: string;
-  description: string;
-}
-
-const EMPTY_FORM: TaskFormState = { title: "", course: "", deadline: "", description: "" };
+const EMPTY_FORM: CreateTaskInput = {
+  title: "",
+  course: "",
+  deadline: "",
+  description: "",
+  status: "todo",
+};
 
 export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskModalProps) {
-  const [form, setForm] = useState<TaskFormState>(EMPTY_FORM);
+  const [form, setForm] = useState<CreateTaskInput>(EMPTY_FORM);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isOpen) return;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -34,17 +36,13 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
 
   if (!isOpen) return null;
 
-  const updateField = (field: keyof TaskFormState, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const title = form.title.trim();
     const course = form.course.trim();
-    const deadline = new Date(form.deadline);
+    const deadline = form.deadline.trim();
 
-    if (!title || !course || Number.isNaN(deadline.getTime())) {
+    if (!title || !course || !deadline) {
       setError("Judul, Mata Kuliah, dan Deadline wajib diisi.");
       return;
     }
@@ -55,8 +53,9 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
       const created = await createTask({
         title,
         course,
-        description: form.description.trim(),
-        deadline: deadline.toISOString(),
+        deadline,
+        description: form.description?.trim(),
+        status: "todo",
       });
       onTaskCreated(created);
       setForm(EMPTY_FORM);
@@ -69,64 +68,90 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/70 p-4 backdrop-blur-sm">
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="create-task-title"
-        className="w-full max-w-md rounded-2xl border border-zinc-800 bg-zinc-900 p-6 shadow-2xl"
-      >
-        <h2 id="create-task-title" className="text-lg font-semibold text-zinc-50">
-          Tambah Tugas Baru
-        </h2>
+    <div
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div className="relative w-full max-w-md rounded-2xl border border-zinc-800/90 bg-zinc-900 p-6 shadow-2xl shadow-black/80">
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute top-5 right-5 text-zinc-400 hover:text-white"
+        >
+          <X className="h-5 w-5" />
+        </button>
+
+        <h2 className="text-lg font-bold text-zinc-50">Tambah Tugas Baru</h2>
+        <p className="mt-1 text-xs text-zinc-400">
+          Masukkan rincian tugas kelompok Space 3IA16.
+        </p>
+
         {error && (
-          <p
+          <div
             role="alert"
-            className="mt-4 rounded-lg border border-red-900 bg-red-950/50 px-3 py-2 text-sm text-red-300"
+            className="mt-4 rounded-lg border border-red-900/60 bg-red-950/40 px-3 py-2 text-xs text-red-300"
           >
             {error}
-          </p>
+          </div>
         )}
-        <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-          <label className="block space-y-2">
-            <span className="text-sm font-medium text-zinc-200">Judul Tugas</span>
+
+        <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-300">
+              Judul Tugas <span className="text-blue-400">*</span>
+            </label>
             <input
               type="text"
               value={form.title}
-              onChange={(e) => updateField("title", e.target.value)}
+              onChange={(e) => setForm({ ...form, title: e.target.value })}
               className={inputClass}
-              placeholder="Contoh: Lab Activity 3"
+              placeholder="Contoh: Implementasi Grafika 3D"
             />
-          </label>
-          <label className="block space-y-2">
-            <span className="text-sm font-medium text-zinc-200">Mata Kuliah</span>
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-300">
+              Mata Kuliah <span className="text-blue-400">*</span>
+            </label>
             <input
               type="text"
               value={form.course}
-              onChange={(e) => updateField("course", e.target.value)}
+              onChange={(e) => setForm({ ...form, course: e.target.value })}
               className={inputClass}
-              placeholder="Contoh: Infrastruktur Awan"
+              placeholder="Contoh: Grafika Komputer / IMK / Jarkom"
             />
-          </label>
-          <label className="block space-y-2">
-            <span className="text-sm font-medium text-zinc-200">Deadline</span>
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-300">
+              Deadline <span className="text-blue-400">*</span>
+            </label>
             <input
               type="datetime-local"
               value={form.deadline}
-              onChange={(e) => updateField("deadline", e.target.value)}
+              onChange={(e) => setForm({ ...form, deadline: e.target.value })}
               className={inputClass}
             />
-          </label>
-          <label className="block space-y-2">
-            <span className="text-sm font-medium text-zinc-200">Deskripsi (Opsional)</span>
+          </div>
+
+          <div>
+            <label className="mb-1.5 block text-xs font-medium text-zinc-300">
+              Deskripsi <span className="text-zinc-500">(Opsional)</span>
+            </label>
             <textarea
-              value={form.description}
-              onChange={(e) => updateField("description", e.target.value)}
-              className={inputClass}
               rows={3}
+              value={form.description}
+              onChange={(e) => setForm({ ...form, description: e.target.value })}
+              className={inputClass}
+              placeholder="Catatan tambahan untuk tugas kelompok..."
             />
-          </label>
-          <div className="flex justify-end gap-2 pt-2">
+          </div>
+
+          <div className="flex justify-end gap-2.5 pt-2">
             <button
               type="button"
               onClick={onClose}

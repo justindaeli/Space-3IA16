@@ -12,9 +12,25 @@ const deadlineFormatter = new Intl.DateTimeFormat("id-ID", {
 });
 
 export function formatDate(value: string): string {
-  return dateFormatter.format(new Date(value));
+  try {
+    return dateFormatter.format(new Date(value));
+  } catch {
+    return value;
+  }
 }
 
 export function formatDeadline(value: string): string {
-  return deadlineFormatter.format(new Date(value));
+  try {
+    return deadlineFormatter.format(new Date(value));
+  } catch {
+    return value;
+  }
+}
+
+export function isDeadlineOverdue(deadline: string): boolean {
+  try {
+    return Date.parse(deadline) < Date.now();
+  } catch {
+    return false;
+  }
 }
