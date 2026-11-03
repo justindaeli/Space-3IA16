@@ -4,7 +4,7 @@ import Link from "next/link";
 const navItems = [
   { href: "#stats", label: "Ringkasan" },
   { href: "#tugas", label: "Papan Tugas" },
-  { href: "#materi", label: "Materi" },
+  { href: "/materi", label: "Materi" },
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {

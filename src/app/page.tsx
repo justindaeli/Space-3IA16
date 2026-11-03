@@ -5,7 +5,7 @@ import { WelcomeHeader } from '@/components/features/dashboard/WelcomeHeader';
 import { QuickStats } from '@/components/features/dashboard/QuickStats';
 import { MaterialLocker } from '@/components/features/materials/MaterialLocker';
 import { TaskBoard } from '@/components/features/tasks/TaskBoard';
-import { getQuickStats, materials } from '@/lib/mock-data';
+import { getQuickStats } from '@/lib/mock-data';
 import { getTasks } from '@/services/taskService';
 import { Task } from '@/types';
 import { LoadingState } from '@/components/ui/LoadingState';
@@ -37,7 +37,7 @@ export default function HomePage() {
       <WelcomeHeader />
       <QuickStats stats={stats} />
       <TaskBoard tasks={tasks} />
-      <MaterialLocker materials={materials} />
+      <MaterialLocker />
     </div>
   );
 }

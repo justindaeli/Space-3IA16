@@ -15,12 +15,15 @@ export interface Task {
   assignee: User;
 }
 
+export type MaterialCategory = "modul" | "slide" | "catatan";
+
 export interface Material {
   id: string;
   title: string;
   course: string;
-  type: "modul" | "slide" | "catatan";
-  uploadedAt: string;
+  fileUrl: string;
+  category: MaterialCategory;
+  createdAt: string;
 }
 
 export interface Announcement {

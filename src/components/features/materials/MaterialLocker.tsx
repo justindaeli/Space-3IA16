@@ -1,70 +1,94 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import { MaterialCourseGroup } from "@/components/features/materials/MaterialCourseGroup";
+import { getMaterials } from "@/services/materialService";
 import type { Material } from "@/types";
-import { EmptyState } from "@/components/ui/EmptyState";
-import { LoadingState } from "@/components/ui/LoadingState";
 
-interface MaterialLockerProps {
-  materials: Material[];
-  isLoading?: boolean;
-}
+type LockerStatus = "loading" | "error" | "ready";
 
-function groupByCourse(materials: Material[]): Map<string, Material[]> {
+function groupByCourse(items: Material[]): Map<string, Material[]> {
   const groups = new Map<string, Material[]>();
-  for (const material of materials) {
-    const current = groups.get(material.course) ?? [];
-    current.push(material);
-    groups.set(material.course, current);
+  for (const item of items) {
+    const current = groups.get(item.course) ?? [];
+    current.push(item);
+    groups.set(item.course, current);
   }
   return groups;
 }
 
-export function MaterialLocker({ materials, isLoading = false }: MaterialLockerProps) {
-  if (isLoading) {
-    return <LoadingState label="Memuat materi..." />;
-  }
+export function MaterialLocker() {
+  const [materials, setMaterials] = useState<Material[]>([]);
+  const [status, setStatus] = useState<LockerStatus>("loading");
+  const [errorMessage, setErrorMessage] = useState("Gagal memuat materi.");
 
-  if (materials.length === 0) {
-    return (
-      <section id="materi">
-        <h2 className="mb-3 text-base font-semibold text-zinc-900 dark:text-zinc-50">
-          Repository Materi
-        </h2>
-        <EmptyState
-          title="Locker masih kosong"
-          description="Unggah modul, slide, atau catatan per mata kuliah."
-        />
-      </section>
-    );
-  }
+  const loadMaterials = useCallback(async () => {
+    setStatus("loading");
+    try {
+      const data = await getMaterials();
+      setMaterials(data);
+      setStatus("ready");
+    } catch (error: unknown) {
+      setErrorMessage(
+        error instanceof Error ? error.message : "Gagal memuat materi.",
+      );
+      setStatus("error");
+    }
+  }, []);
 
-  const grouped = groupByCourse(materials);
+  useEffect(() => {
+    void loadMaterials();
+  }, [loadMaterials]);
 
   return (
-    <section id="materi">
-      <h2 className="mb-3 text-base font-semibold text-zinc-900 dark:text-zinc-50">
-        Repository Materi
-      </h2>
-      <div className="flex flex-col gap-4">
-        {[...grouped.entries()].map(([course, items]) => (
-          <article
-            key={course}
-            className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-800/50"
+    <section
+      id="materi"
+      className="rounded-2xl border border-zinc-800 bg-zinc-950 p-4 sm:p-6"
+    >
+      <header className="mb-4">
+        <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-indigo-400">
+          Material Locker
+        </p>
+        <h2 className="mt-1 text-base font-semibold text-zinc-100">Repository Materi</h2>
+      </header>
+
+      {status === "loading" ? (
+        <div className="flex items-center justify-center gap-2 py-10 text-sm text-zinc-400" role="status">
+          <span className="h-4 w-4 animate-spin rounded-full border-2 border-zinc-700 border-t-indigo-400" />
+          Memuat materi...
+        </div>
+      ) : null}
+
+      {status === "error" ? (
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-8 text-center">
+          <p className="text-sm font-medium text-zinc-100">Gagal memuat locker</p>
+          <p className="mt-1 text-sm text-zinc-500">{errorMessage}</p>
+          <button
+            type="button"
+            onClick={() => void loadMaterials()}
+            className="mt-4 rounded-md bg-indigo-600 px-4 py-2 text-xs font-medium text-white transition-all duration-200 hover:bg-indigo-500 hover:opacity-90"
           >
-            <h3 className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">{course}</h3>
-            <ul className="mt-2 divide-y divide-zinc-200 dark:divide-zinc-700">
-              {items.map((item) => (
-                <li key={item.id} className="flex items-center justify-between gap-3 py-2">
-                  <div>
-                    <p className="text-sm text-zinc-800 dark:text-zinc-200">{item.title}</p>
-                    <p className="text-xs capitalize text-zinc-500 dark:text-zinc-400">
-                      {item.type}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </div>
+            Coba lagi
+          </button>
+        </div>
+      ) : null}
+
+      {status === "ready" && materials.length === 0 ? (
+        <div className="rounded-xl border border-dashed border-zinc-800 px-4 py-8 text-center">
+          <p className="text-sm font-medium text-zinc-100">Locker masih kosong</p>
+          <p className="mt-1 text-sm text-zinc-500">
+            Belum ada modul, slide, atau catatan per mata kuliah.
+          </p>
+        </div>
+      ) : null}
+
+      {status === "ready" && materials.length > 0 ? (
+        <div className="flex flex-col gap-3">
+          {[...groupByCourse(materials).entries()].map(([course, items]) => (
+            <MaterialCourseGroup key={course} course={course} materials={items} />
+          ))}
+        </div>
+      ) : null}
     </section>
   );
 }
