@@ -1,0 +1,10 @@
+---
+description: Aturan penulisan backend Node.js, Express/API, dan database
+globs: server/**/*.js, src/app/api/**/*.ts, backend/**/*.js
+---
+
+# Node.js & Backend Guidelines
+- Gunakan async/await untuk semua operasi I/O (database, file system, fetch API).
+- Selalu bungkus route handler atau controller dengan blok `try-catch` yang jelas.
+- Validasi semua input *request* (body/query) menggunakan Zod atau middleware validasi sebelum masuk ke database.
+- Terapkan struktur MVC (Model-View-Controller) atau modular router yang rapi agar kode mudah dirawat bersama kelompok.

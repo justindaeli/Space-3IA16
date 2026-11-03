@@ -1,0 +1,9 @@
+---
+description: Aturan utama pengembangan web
+globs: src/**/*
+---
+
+# Web Development Guidelines
+- Gunakan TypeScript secara ketat.
+- Gunakan Tailwind CSS untuk styling komponen.
+- Pastikan kode modular dan bersih.

@@ -1,0 +1,13 @@
+---
+description: Standar komponen UI, layout responsif, dan styling Tailwind
+globs: src/components/**/*.tsx, app/**/*.tsx
+---
+
+# UI & Frontend Design Skill
+
+- Styling HANYA menggunakan Tailwind CSS. Hindari inline-style (`style={{...}}`).
+- Terapkan pendekatan Mobile-First (base -> sm -> md -> lg).
+- Desain UI Harus Terlihat Modern:
+  - Gunakan warna subtle (seperti `slate-900`, `zinc-800`, `gray-50`) dibanding warna solid murni (`black`/`white`).
+  - Gunakan micro-interaction: efek smooth transition pada hover (`hover:opacity-90`, `transition-all duration-200`).
+- State Mandatory: Semua komponen interaktif WAJIB menangani 3 kondisi: Normal, Loading (spinner/skeleton), dan Error.

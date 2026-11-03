@@ -1,0 +1,11 @@
+---
+description: Aturan penulisan TypeScript dan keamanan API
+globs: **/*.ts, **/*.tsx
+---
+
+# TypeScript & Security Rules
+
+- DILARANG keras menggunakan tipe `any`. Gunakan interface/type eksplisit atau `unknown`.
+- Untuk form dan request API, selalu gunakan validasi Zod.
+- Bungkus semua fungsi async/API call dengan blok `try-catch` dan sertakan respon error yang informatif.
+- Jangan pernah hardcode API Key atau rahasia apa pun di file ini; gunakan `process.env`.

@@ -1,0 +1,16 @@
+---
+description: Aturan anti-slop, kebersihan kode, dan efisiensi output
+alwaysApply: true
+---
+
+# Anti-AI Slop & Efficiency Rules
+
+## Gaya Komunikasi AI:
+- Jawab dengan ringkas dan to-the-point. Jangan berikan penjelasan teoretis yang panjang.
+- Tampilkan HANYA potongan kode yang berubah atau perlu ditambah, jangan cetak ulang seluruh isi file.
+
+## Kualitas Kode:
+- Hindari penulisan kode "generik/boilerplate" berlebihan.
+- JANGAN ganti logika yang sudah berfungsi kecuali diminta secara eksplisit.
+- Gunakan pendekatan early return untuk menghindari indentasi/nesting bercabang berlebihan.
+- Tulis kode modular: 1 komponen maks 150 baris. Jika lebih, pecah jadi komponen kecil.
