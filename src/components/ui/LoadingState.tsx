@@ -1,15 +1,16 @@
 interface LoadingStateProps {
+  message?: string;
   label?: string;
 }
 
-export function LoadingState({ label = "Memuat..." }: LoadingStateProps) {
+export function LoadingState({ message = 'Memuat...', label }: LoadingStateProps) {
+  const displayText = label || message;
   return (
-    <div
-      className="flex items-center justify-center gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-8 text-sm text-zinc-500 dark:border-zinc-800 dark:bg-zinc-800/40 dark:text-zinc-400"
-      role="status"
-    >
-      <span className="h-4 w-4 animate-spin rounded-full border-2 border-zinc-300 border-t-zinc-700 dark:border-zinc-600 dark:border-t-zinc-200" />
-      {label}
+    <div className="flex h-64 w-full items-center justify-center">
+      <div className="flex flex-col items-center space-y-3">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-zinc-600 border-t-blue-500" />
+        <p className="text-sm text-zinc-400">{displayText}</p>
+      </div>
     </div>
   );
 }

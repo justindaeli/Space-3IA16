@@ -4,8 +4,8 @@ import { Task, TaskStatus } from '@/types';
 export interface CreateTaskInput {
   title: string;
   description?: string;
-  subject: string;
-  due_date: string;
+  course: string;
+  deadline: string;
   status?: TaskStatus;
 }
 
@@ -36,9 +36,9 @@ export async function createTask(input: CreateTaskInput): Promise<Task> {
       {
         title: input.title,
         description: input.description || '',
-        subject: input.subject,
-        due_date: input.due_date,
-        status: input.status || 'TODO',
+        course: input.course,
+        deadline: input.deadline,
+        status: input.status || 'todo',
       },
     ])
     .select()
@@ -53,7 +53,7 @@ export async function createTask(input: CreateTaskInput): Promise<Task> {
 }
 
 /**
- * Mengupdate status tugas (TODO / IN_PROGRESS / DONE)
+ * Mengupdate status tugas
  */
 export async function updateTaskStatus(id: string, status: TaskStatus): Promise<Task> {
   const { data, error } = await supabase
