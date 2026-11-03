@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "KelasIn16",
+  title: "Space 3IA16",
   description:
     "Kolaborasi kelas: tugas kelompok, materi kuliah, dan pengumuman dalam satu tempat.",
 };

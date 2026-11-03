@@ -1,5 +1,5 @@
 import { LoadingState } from "@/components/ui/LoadingState";
 
 export default function Loading() {
-  return <LoadingState label="Memuat KelasIn16..." />;
+  return <LoadingState label="Memuat Space 3IA16..." />;
 }

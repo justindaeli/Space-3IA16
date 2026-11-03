@@ -16,7 +16,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             href="/"
             className="text-sm font-semibold tracking-tight text-zinc-900 transition-opacity duration-200 hover:opacity-80 dark:text-zinc-100"
           >
-            KelasIn16
+            Space 3IA16
           </Link>
           <nav className="flex gap-1 text-sm">
             {navItems.map((item) => (
