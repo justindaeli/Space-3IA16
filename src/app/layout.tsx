@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       lang="id"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-zinc-100 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100">
+      <body className="flex min-h-full flex-col bg-zinc-950 text-zinc-100">
         <AppShell>{children}</AppShell>
       </body>
     </html>

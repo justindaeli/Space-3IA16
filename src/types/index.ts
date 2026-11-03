@@ -1,25 +1,22 @@
 export type TaskStatus = "todo" | "in-progress" | "done";
 
-export interface User {
-  id: string;
-  name: string;
-  initials: string;
-}
+export type MaterialType = "modul" | "slide" | "catatan";
 
 export interface Task {
   id: string;
   title: string;
+  description: string;
   course: string;
   deadline: string;
   status: TaskStatus;
-  assignee: User;
 }
 
 export interface Material {
   id: string;
   title: string;
   course: string;
-  type: "modul" | "slide" | "catatan";
+  type: MaterialType;
+  url: string | null;
   uploadedAt: string;
 }
 

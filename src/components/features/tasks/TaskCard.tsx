@@ -1,31 +1,53 @@
-import type { Task } from "@/types";
+import { useState } from "react";
+import type { Task, TaskStatus } from "@/types";
+import { TASK_STATUSES, TASK_STATUS_LABELS } from "@/lib/task-status";
+import { formatDeadline } from "@/lib/format";
 
 interface TaskCardProps {
   task: Task;
+  isPending: boolean;
+  onStatusChange: (status: TaskStatus) => void;
 }
 
-function formatDeadline(value: string): string {
-  return new Date(`${value}T00:00:00`).toLocaleDateString("id-ID", {
-    day: "numeric",
-    month: "short",
-  });
-}
+export function TaskCard({ task, isPending, onStatusChange }: TaskCardProps) {
+  const [renderedAt] = useState(() => Date.now());
+  const isOverdue = task.status !== "done" && Date.parse(task.deadline) < renderedAt;
 
-export function TaskCard({ task }: TaskCardProps) {
+  const handleChange = (value: string) => {
+    const next = TASK_STATUSES.find((status) => status === value);
+    if (next) onStatusChange(next);
+  };
+
   return (
-    <article className="rounded-lg border border-zinc-200 bg-white p-3 transition-all duration-200 hover:border-zinc-300 hover:shadow-sm dark:border-zinc-700 dark:bg-zinc-800 dark:hover:border-zinc-600">
-      <h3 className="text-sm font-medium text-zinc-900 dark:text-zinc-50">{task.title}</h3>
-      <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{task.course}</p>
-      <div className="mt-3 flex items-center justify-between gap-2">
-        <span className="rounded-full bg-amber-100 px-2 py-0.5 text-[11px] font-medium text-amber-800 dark:bg-amber-500/15 dark:text-amber-300">
+    <article className="rounded-xl border border-zinc-800 bg-zinc-900 p-4 transition-all duration-200 hover:border-zinc-700 hover:shadow-lg hover:shadow-black/30">
+      <p className="text-xs font-medium text-blue-400">{task.course}</p>
+      <h4 className="mt-1 text-sm font-medium leading-5 text-zinc-50">{task.title}</h4>
+      {task.description && (
+        <p className="mt-2 line-clamp-2 text-xs leading-5 text-zinc-400">{task.description}</p>
+      )}
+      <div className="mt-4 flex items-center justify-between gap-2">
+        <span
+          className={`rounded-full px-2 py-1 text-[11px] font-medium ${
+            isOverdue
+              ? "bg-red-500/15 text-red-300"
+              : "bg-amber-500/15 text-amber-300"
+          }`}
+        >
           {formatDeadline(task.deadline)}
         </span>
-        <span
-          title={task.assignee.name}
-          className="flex h-6 w-6 items-center justify-center rounded-full bg-zinc-200 text-[10px] font-semibold text-zinc-700 dark:bg-zinc-700 dark:text-zinc-200"
+        <select
+          aria-label={`Ubah status ${task.title}`}
+          value={task.status}
+          disabled={isPending}
+          onChange={(event) => handleChange(event.target.value)}
+          className="rounded-lg border border-zinc-700 bg-zinc-800 px-2 py-1 text-xs text-zinc-100 transition-colors duration-200 hover:border-zinc-600 focus:border-blue-500 focus:outline-none disabled:cursor-wait disabled:opacity-60"
         >
-          {task.assignee.initials}
-        </span>
+          {TASK_STATUSES.map((status) => (
+            <option key={status} value={status}>
+              {TASK_STATUS_LABELS[status]}
+            </option>
+          ))}
+        </select>
       </div>
     </article>
   );

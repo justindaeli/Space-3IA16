@@ -1,49 +1,47 @@
-import type { Task } from "@/types";
-import { EmptyState } from "@/components/ui/EmptyState";
-import { LoadingState } from "@/components/ui/LoadingState";
+import type { Task, TaskStatus } from "@/types";
+import { TASK_STATUSES, TASK_STATUS_LABELS } from "@/lib/task-status";
+import { primaryButtonClass } from "@/lib/ui-classes";
 import { TaskColumn } from "@/components/features/tasks/TaskColumn";
 
 interface TaskBoardProps {
   tasks: Task[];
-  isLoading?: boolean;
+  pendingTaskId: string | null;
+  actionError: string | null;
+  onAddTask: () => void;
+  onMoveTask: (id: string, status: TaskStatus) => void;
 }
 
-const columns = [
-  { status: "todo", title: "To Do" },
-  { status: "in-progress", title: "In Progress" },
-  { status: "done", title: "Done" },
-] as const;
-
-export function TaskBoard({ tasks, isLoading = false }: TaskBoardProps) {
-  if (isLoading) {
-    return <LoadingState label="Memuat papan tugas..." />;
-  }
-
-  if (tasks.length === 0) {
-    return (
-      <section id="tugas">
-        <h2 className="mb-3 text-base font-semibold text-zinc-900 dark:text-zinc-50">
-          Papan Tugas
-        </h2>
-        <EmptyState
-          title="Belum ada tugas"
-          description="Tambahkan tugas kelompok untuk mulai kolaborasi."
-        />
-      </section>
-    );
-  }
-
+export function TaskBoard({
+  tasks,
+  pendingTaskId,
+  actionError,
+  onAddTask,
+  onMoveTask,
+}: TaskBoardProps) {
   return (
-    <section id="tugas">
-      <h2 className="mb-3 text-base font-semibold text-zinc-900 dark:text-zinc-50">
-        Papan Tugas
-      </h2>
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-        {columns.map((column) => (
+    <section id="tugas" className="scroll-mt-24 space-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <h2 className="text-lg font-semibold text-zinc-50">Papan Tugas</h2>
+        <button type="button" onClick={onAddTask} className={primaryButtonClass}>
+          Tambah Tugas
+        </button>
+      </div>
+      {actionError && (
+        <p
+          role="alert"
+          className="rounded-lg border border-red-900 bg-red-950/50 px-4 py-2 text-sm text-red-300"
+        >
+          {actionError}
+        </p>
+      )}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        {TASK_STATUSES.map((status) => (
           <TaskColumn
-            key={column.status}
-            title={column.title}
-            tasks={tasks.filter((task) => task.status === column.status)}
+            key={status}
+            title={TASK_STATUS_LABELS[status]}
+            tasks={tasks.filter((task) => task.status === status)}
+            pendingTaskId={pendingTaskId}
+            onMoveTask={onMoveTask}
           />
         ))}
       </div>

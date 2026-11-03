@@ -10,11 +10,11 @@ const navItems = [
 export function AppShell({ children }: { children: ReactNode }) {
   return (
     <>
-      <header className="sticky top-0 z-10 border-b border-zinc-200 bg-zinc-50/90 backdrop-blur dark:border-zinc-800 dark:bg-zinc-900/90">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+      <header className="sticky top-0 z-10 border-b border-zinc-800 bg-zinc-950/80 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4">
           <Link
             href="/"
-            className="text-sm font-semibold tracking-tight text-zinc-900 transition-opacity duration-200 hover:opacity-80 dark:text-zinc-100"
+            className="text-sm font-semibold tracking-tight text-zinc-50 transition-opacity duration-200 hover:opacity-80"
           >
             Space 3IA16
           </Link>
@@ -23,7 +23,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               <a
                 key={item.href}
                 href={item.href}
-                className="rounded-md px-3 py-1.5 text-zinc-600 transition-colors duration-200 hover:bg-zinc-200/70 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+                className="rounded-lg px-3 py-2 text-zinc-400 transition-colors duration-200 hover:bg-zinc-800 hover:text-zinc-50"
               >
                 {item.label}
               </a>
