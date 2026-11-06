@@ -72,9 +72,7 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
       role="dialog"
       aria-modal="true"
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div className="relative w-full max-w-md rounded-2xl border border-zinc-800/90 bg-zinc-900 p-6 shadow-2xl shadow-black/80">
         <button
@@ -86,24 +84,17 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
         </button>
 
         <h2 className="text-lg font-bold text-zinc-50">Tambah Tugas Baru</h2>
-        <p className="mt-1 text-xs text-zinc-400">
-          Masukkan rincian tugas kelompok Space 3IA16.
-        </p>
+        <p className="mt-1 text-xs text-zinc-400">Masukkan rincian tugas kelompok Space 3IA16.</p>
 
         {error && (
-          <div
-            role="alert"
-            className="mt-4 rounded-lg border border-red-900/60 bg-red-950/40 px-3 py-2 text-xs text-red-300"
-          >
+          <div className="mt-4 rounded-lg border border-red-900/60 bg-red-950/40 px-3 py-2 text-xs text-red-300">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-5 space-y-3.5">
           <div>
-            <label className="mb-1.5 block text-xs font-medium text-zinc-300">
-              Judul Tugas <span className="text-blue-400">*</span>
-            </label>
+            <label className="mb-1 block text-xs font-medium text-zinc-300">Judul Tugas *</label>
             <input
               type="text"
               value={form.title}
@@ -112,24 +103,18 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
               placeholder="Contoh: Implementasi Grafika 3D"
             />
           </div>
-
           <div>
-            <label className="mb-1.5 block text-xs font-medium text-zinc-300">
-              Mata Kuliah <span className="text-blue-400">*</span>
-            </label>
+            <label className="mb-1 block text-xs font-medium text-zinc-300">Mata Kuliah *</label>
             <input
               type="text"
               value={form.course}
               onChange={(e) => setForm({ ...form, course: e.target.value })}
               className={inputClass}
-              placeholder="Contoh: Grafika Komputer / IMK / Jarkom"
+              placeholder="Contoh: Grafika Komputer / IMK"
             />
           </div>
-
           <div>
-            <label className="mb-1.5 block text-xs font-medium text-zinc-300">
-              Deadline <span className="text-blue-400">*</span>
-            </label>
+            <label className="mb-1 block text-xs font-medium text-zinc-300">Deadline *</label>
             <input
               type="datetime-local"
               value={form.deadline}
@@ -137,13 +122,10 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
               className={inputClass}
             />
           </div>
-
           <div>
-            <label className="mb-1.5 block text-xs font-medium text-zinc-300">
-              Deskripsi <span className="text-zinc-500">(Opsional)</span>
-            </label>
+            <label className="mb-1 block text-xs font-medium text-zinc-300">Deskripsi (Opsional)</label>
             <textarea
-              rows={3}
+              rows={2}
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               className={inputClass}
@@ -152,12 +134,7 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
           </div>
 
           <div className="flex justify-end gap-2.5 pt-2">
-            <button
-              type="button"
-              onClick={onClose}
-              disabled={isSaving}
-              className={secondaryButtonClass}
-            >
+            <button type="button" onClick={onClose} disabled={isSaving} className={secondaryButtonClass}>
               Batal
             </button>
             <button type="submit" disabled={isSaving} className={primaryButtonClass}>
