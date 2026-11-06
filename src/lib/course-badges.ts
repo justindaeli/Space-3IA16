@@ -30,3 +30,4 @@ const DEFAULT_STYLE: CourseStyle = {
 export function getCourseStyle(course: string): CourseStyle {
   return COURSE_STYLES[course] ?? DEFAULT_STYLE;
 }
+

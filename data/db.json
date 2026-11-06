@@ -1,0 +1,206 @@
+{
+  "users": [
+    {
+      "id": "u-admin",
+      "name": "Administrator 3IA16",
+      "email": "admin@space3ia16.id",
+      "username": "admin",
+      "role": "admin",
+      "status": "active",
+      "initials": "AD",
+      "passwordHash": "199f2d00c4c4d016bedddb423af72f46b21fd22b4eb204dd51c6732f72d0cff8ca79b262def6539c108f121c166735592a2b3fc167ca9253298324ad09a8cdd8",
+      "passwordSalt": "b30a0b199eb7830566baa1d90031b924",
+      "createdAt": "2026-11-01T00:00:00.000Z"
+    },
+    {
+      "id": "u1",
+      "name": "Justin Daeli",
+      "email": "user@space3ia16.id",
+      "username": "justindaeli",
+      "role": "user",
+      "status": "active",
+      "initials": "JD",
+      "passwordHash": "d52dcc9e0ac259c2e8fe6c9b40426ef4dabd3f1f9f28aed57b285472e4984dab2940443661a31b2abe438bd435c1784f3e541bf1daad238077425883f7c9ca60",
+      "passwordSalt": "44a9a14760c300b6f75bf63efa4f567a",
+      "createdAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "u2",
+      "name": "Alya Putri",
+      "email": "alya@space3ia16.id",
+      "username": "alyaputri",
+      "role": "user",
+      "status": "active",
+      "initials": "AP",
+      "passwordHash": "d52dcc9e0ac259c2e8fe6c9b40426ef4dabd3f1f9f28aed57b285472e4984dab2940443661a31b2abe438bd435c1784f3e541bf1daad238077425883f7c9ca60",
+      "passwordSalt": "44a9a14760c300b6f75bf63efa4f567a",
+      "createdAt": "2026-11-02T00:00:00.000Z"
+    },
+    {
+      "id": "u3",
+      "name": "Rafi Athallah",
+      "email": "rafi@space3ia16.id",
+      "username": "rafiathallah",
+      "role": "user",
+      "status": "active",
+      "initials": "RA",
+      "passwordHash": "d52dcc9e0ac259c2e8fe6c9b40426ef4dabd3f1f9f28aed57b285472e4984dab2940443661a31b2abe438bd435c1784f3e541bf1daad238077425883f7c9ca60",
+      "passwordSalt": "44a9a14760c300b6f75bf63efa4f567a",
+      "createdAt": "2026-11-03T00:00:00.000Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "Implementasi Algoritma Bresenham",
+      "description": "Buat algoritma garis dan lingkaran menggunakan OpenGL / WebGL.",
+      "course": "Grafika Komputer",
+      "deadline": "2026-11-12T23:59:00",
+      "status": "todo",
+      "assignee": {
+        "id": "u1",
+        "name": "Justin Daeli",
+        "initials": "JD"
+      }
+    },
+    {
+      "id": "t2",
+      "title": "Proyek Routing & Subnetting Lab 4",
+      "description": "Konfigurasi topologi jaringan OSPF dan analisis packet loss di Cisco Packet Tracer.",
+      "course": "Jaringan Komputer",
+      "deadline": "2026-11-09T18:00:00",
+      "status": "in-progress",
+      "assignee": {
+        "id": "u2",
+        "name": "Alya Putri",
+        "initials": "AP"
+      }
+    },
+    {
+      "id": "t3",
+      "title": "Wireframe High-Fidelity Dashboard",
+      "description": "Selesaikan desain prototipe antarmuka sistem web dengan standar kegunaan Nielsen.",
+      "course": "IMK",
+      "deadline": "2026-11-15T20:00:00",
+      "status": "done",
+      "assignee": {
+        "id": "u3",
+        "name": "Rafi Athallah",
+        "initials": "RA"
+      }
+    },
+    {
+      "id": "t4",
+      "title": "Slide Presentasi Evaluasi Heuristik",
+      "description": "Persiapkan 10 slide evaluasi antarmuka untuk presentasi kelompok minggu depan.",
+      "course": "IMK",
+      "deadline": "2026-11-16T12:00:00",
+      "status": "todo",
+      "assignee": {
+        "id": "u4",
+        "name": "Dina Rahma",
+        "initials": "DR"
+      }
+    },
+    {
+      "id": "t5",
+      "title": "Simulasi CPU Scheduling Multilevel Queue",
+      "description": "Buat laporan hasil analisis performa algoritma penjadwalan proses.",
+      "course": "Sistem Operasi",
+      "deadline": "2026-11-18T23:59:00",
+      "status": "in-progress",
+      "assignee": {
+        "id": "u1",
+        "name": "Justin Daeli",
+        "initials": "JD"
+      }
+    }
+  ],
+  "materials": [
+    {
+      "id": "m1",
+      "title": "Modul 3 — Heuristic Evaluation & Usability",
+      "course": "IMK",
+      "type": "modul",
+      "uploadedAt": "2026-10-28",
+      "url": "https://example.com/modul-imk-3.pdf"
+    },
+    {
+      "id": "m2",
+      "title": "Slide Kuliah: Arsitektur OSI Layer & TCP/IP",
+      "course": "Jaringan Komputer",
+      "type": "slide",
+      "uploadedAt": "2026-10-30",
+      "url": "https://example.com/slide-jarkom-osi.pdf"
+    },
+    {
+      "id": "m3",
+      "title": "Catatan Praktikum Routing Statis & OSPF",
+      "course": "Jaringan Komputer",
+      "type": "catatan",
+      "uploadedAt": "2026-11-01",
+      "url": "https://example.com/catatan-routing.pdf"
+    },
+    {
+      "id": "m4",
+      "title": "Slide Transformasi 2D & 3D Grafika",
+      "course": "Grafika Komputer",
+      "type": "slide",
+      "uploadedAt": "2026-11-03",
+      "url": "https://example.com/slide-grafkom.pdf"
+    },
+    {
+      "id": "m5",
+      "title": "Modul Praktikum Virtual Memory & Paging",
+      "course": "Sistem Operasi",
+      "type": "modul",
+      "uploadedAt": "2026-11-04",
+      "url": "https://example.com/modul-os-paging.pdf"
+    }
+  ],
+  "announcements": [
+    {
+      "id": "a1",
+      "title": "Kumpulkan draft UI dan laporan lab sebelum Kamis 23:59 WIB",
+      "createdAt": "2026-11-05"
+    }
+  ],
+  "activities": [
+    {
+      "id": "act-1793927467229-7emq",
+      "userId": "u1",
+      "userName": "Justin Daeli",
+      "action": "USER_LOGIN",
+      "target": "Authentication",
+      "details": "Berhasil masuk ke platform",
+      "createdAt": "2026-11-06T01:11:07.229Z"
+    },
+    {
+      "id": "act-1793927464013-balb",
+      "userId": "u-admin",
+      "userName": "Administrator 3IA16",
+      "action": "USER_LOGOUT",
+      "target": "Authentication",
+      "details": "Keluar dari platform",
+      "createdAt": "2026-11-06T01:11:04.013Z"
+    },
+    {
+      "id": "act-1793927443921-y1ji",
+      "userId": "u-admin",
+      "userName": "Administrator 3IA16",
+      "action": "USER_LOGIN",
+      "target": "Authentication",
+      "details": "Berhasil masuk ke platform",
+      "createdAt": "2026-11-06T01:10:43.921Z"
+    },
+    {
+      "id": "act-1",
+      "userId": "u-admin",
+      "userName": "Administrator 3IA16",
+      "action": "SYSTEM_INITIALIZED",
+      "target": "Space 3IA16 Platform",
+      "details": "Sistem kelas diinisialisasi dengan akun Admin & Mahasiswa.",
+      "createdAt": "2026-11-05T12:00:00.000Z"
+    }
+  ]
+}
