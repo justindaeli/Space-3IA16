@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { requireAdminUser } from "@/lib/server/session";
-import { createDbMaterial, deleteDbMaterial } from "@/lib/server/db-content";
-import { logActivity } from "@/lib/server/db-content";
+import { createMaterial, deleteMaterial, logActivity } from "@/lib/server/db-supabase-content";
 import type { CreateMaterialInput } from "@/types";
 
 export async function POST(request: Request) {
@@ -13,8 +12,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Judul, Mata Kuliah, dan Tipe wajib diisi." }, { status: 400 });
     }
 
-    const created = createDbMaterial(body);
-    logActivity(admin.id, admin.name, "CREATE_MATERIAL", created.title, `Menambahkan materi (${created.course})`);
+    const created = await createMaterial(body);
+    if (!created) {
+      return NextResponse.json({ error: "Gagal menambahkan materi" }, { status: 500 });
+    }
+
+    await logActivity(admin.id, admin.name, "CREATE_MATERIAL", created.title, `Menambahkan materi (${created.course})`);
 
     return NextResponse.json({ success: true, material: created }, { status: 201 });
   } catch (err: unknown) {
@@ -33,12 +36,12 @@ export async function DELETE(request: Request) {
       return NextResponse.json({ error: "ID materi diperlukan." }, { status: 400 });
     }
 
-    const ok = deleteDbMaterial(id);
+    const ok = await deleteMaterial(id);
     if (!ok) {
       return NextResponse.json({ error: "Materi tidak ditemukan." }, { status: 404 });
     }
 
-    logActivity(admin.id, admin.name, "DELETE_MATERIAL", id, "Menghapus materi perkuliahan");
+    await logActivity(admin.id, admin.name, "DELETE_MATERIAL", id, "Menghapus materi perkuliahan");
     return NextResponse.json({ success: true });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Gagal menghapus materi";

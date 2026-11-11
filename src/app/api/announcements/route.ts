@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { getAllAnnouncements } from "@/lib/server/db-content";
+import { getAllAnnouncements } from "@/lib/server/db-supabase-content";
 
 export async function GET() {
-  const announcements = getAllAnnouncements();
+  const announcements = await getAllAnnouncements();
   return NextResponse.json({ announcements });
 }
 

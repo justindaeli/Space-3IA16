@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAdminUser } from "@/lib/server/session";
-import { getAllUsers, createUser } from "@/lib/server/db-users";
-import { logActivity } from "@/lib/server/db-content";
+import { getAllUsers } from "@/lib/server/db-supabase-users";
+import { logActivity } from "@/lib/server/db-supabase-content";
 import type { CreateUserInput, UserRole, UserStatus } from "@/types";
 
 export async function GET(request: Request) {
@@ -12,7 +12,7 @@ export async function GET(request: Request) {
     const role = searchParams.get("role") as UserRole | null;
     const status = searchParams.get("status") as UserStatus | null;
 
-    let users = getAllUsers();
+    let users = await getAllUsers();
     if (q) {
       users = users.filter(
         (u) =>
@@ -33,31 +33,6 @@ export async function GET(request: Request) {
     const message = err instanceof Error ? err.message : "Akses ditolak";
     const status = message === "UNAUTHORIZED" ? 401 : message === "FORBIDDEN" ? 403 : 500;
     return NextResponse.json({ error: message }, { status });
-  }
-}
-
-export async function POST(request: Request) {
-  try {
-    const admin = await requireAdminUser();
-    const body = (await request.json()) as CreateUserInput;
-
-    if (!body.name || !body.email || !body.username || !body.password || !body.role) {
-      return NextResponse.json({ error: "Semua data pengguna wajib diisi." }, { status: 400 });
-    }
-
-    const created = createUser(body);
-    logActivity(
-      admin.id,
-      admin.name,
-      "CREATE_USER",
-      created.name,
-      `Membuat pengguna baru (${created.role})`
-    );
-
-    return NextResponse.json({ success: true, user: created }, { status: 201 });
-  } catch (err: unknown) {
-    const message = err instanceof Error ? err.message : "Gagal membuat pengguna";
-    return NextResponse.json({ error: message }, { status: 400 });
   }
 }
 

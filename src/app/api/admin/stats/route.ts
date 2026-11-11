@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 import { requireAdminUser } from "@/lib/server/session";
-import { getAdminStats } from "@/lib/server/db-content";
+import { getAdminStats } from "@/lib/server/db-supabase-content";
 
 export async function GET() {
   try {
     await requireAdminUser();
-    const stats = getAdminStats();
+    const stats = await getAdminStats();
     return NextResponse.json({ stats });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Akses ditolak";

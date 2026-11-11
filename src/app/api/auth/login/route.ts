@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { findUserByIdentifier, toAuthUser } from "@/lib/server/db-users";
+import { findUserByIdentifier, toAuthUser } from "@/lib/server/db-supabase-users";
 import { verifyPassword } from "@/lib/server/crypto";
 import { createSessionToken, setSessionCookie } from "@/lib/server/session";
-import { logActivity } from "@/lib/server/db-content";
+import { logActivity } from "@/lib/server/db-supabase-content";
 import type { LoginCredentials } from "@/types";
 
 export async function POST(request: Request) {
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const user = findUserByIdentifier(identifier);
+    const user = await findUserByIdentifier(identifier);
     if (!user) {
       return NextResponse.json(
         { error: "Akun tidak ditemukan. Periksa kembali email atau username." },
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     const token = await createSessionToken(authUser, rememberMe);
     await setSessionCookie(token, rememberMe);
 
-    logActivity(user.id, user.name, "USER_LOGIN", "Authentication", "Berhasil masuk ke platform");
+    await logActivity(user.id, user.name, "USER_LOGIN", "Authentication", "Berhasil masuk ke platform");
 
     return NextResponse.json({
       success: true,

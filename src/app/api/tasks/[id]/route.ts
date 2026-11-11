@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { updateDbTaskStatus } from "@/lib/server/db-content";
+import { updateTaskStatus } from "@/lib/server/db-supabase-content";
 import type { TaskStatus } from "@/types";
 
 export async function PATCH(
@@ -14,8 +14,12 @@ export async function PATCH(
       return NextResponse.json({ error: "Status tugas diperlukan." }, { status: 400 });
     }
 
-    const updated = updateDbTaskStatus(id, body.status);
-    return NextResponse.json({ success: true, task: updated });
+    const success = await updateTaskStatus(id, body.status);
+    if (!success) {
+      return NextResponse.json({ error: "Tugas tidak ditemukan" }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Gagal memperbarui status tugas";
     return NextResponse.json({ error: message }, { status: 500 });

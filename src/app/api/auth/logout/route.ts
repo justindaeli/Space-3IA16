@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { clearSessionCookie, getSessionUser } from "@/lib/server/session";
-import { logActivity } from "@/lib/server/db-content";
+import { logActivity } from "@/lib/server/db-supabase-content";
 
 export async function POST() {
   try {
     const user = await getSessionUser();
     if (user) {
-      logActivity(user.id, user.name, "USER_LOGOUT", "Authentication", "Keluar dari platform");
+      await logActivity(user.id, user.name, "USER_LOGOUT", "Authentication", "Keluar dari platform");
     }
     await clearSessionCookie();
     return NextResponse.json({ success: true });

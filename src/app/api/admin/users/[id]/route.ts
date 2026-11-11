@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAdminUser } from "@/lib/server/session";
-import { updateUser, deleteUser, findUserById } from "@/lib/server/db-users";
-import { logActivity } from "@/lib/server/db-content";
+import { findUserById, updateUserRole, updateUserStatus } from "@/lib/server/db-supabase-users";
+import { deleteUser, logActivity } from "@/lib/server/db-supabase-content";
 import type { UpdateUserInput } from "@/types";
 
 export async function PATCH(
@@ -13,13 +13,24 @@ export async function PATCH(
     const { id } = await params;
     const body = (await request.json()) as UpdateUserInput;
 
-    const existing = findUserById(id);
+    const existing = await findUserById(id);
     if (!existing) {
       return NextResponse.json({ error: "Pengguna tidak ditemukan." }, { status: 404 });
     }
 
-    const updated = updateUser(id, body);
-    logActivity(
+    if (body.role && (body.role === "admin" || body.role === "user")) {
+      await updateUserRole(id, body.role);
+    }
+    if (body.status && (body.status === "active" || body.status === "inactive")) {
+      await updateUserStatus(id, body.status);
+    }
+
+    const updated = await findUserById(id);
+    if (!updated) {
+      return NextResponse.json({ error: "Gagal memperbarui pengguna" }, { status: 500 });
+    }
+
+    await logActivity(
       admin.id,
       admin.name,
       "UPDATE_USER",
@@ -49,13 +60,13 @@ export async function DELETE(
       );
     }
 
-    const target = findUserById(id);
+    const target = await findUserById(id);
     if (!target) {
       return NextResponse.json({ error: "Pengguna tidak ditemukan." }, { status: 404 });
     }
 
-    deleteUser(id);
-    logActivity(
+    await deleteUser(id);
+    await logActivity(
       admin.id,
       admin.name,
       "DELETE_USER",

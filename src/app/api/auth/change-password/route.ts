@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import { requireSessionUser } from "@/lib/server/session";
-import { findUserById, updateUser } from "@/lib/server/db-users";
+import { findUserById } from "@/lib/server/db-supabase-users";
 import { verifyPassword } from "@/lib/server/crypto";
-import { logActivity } from "@/lib/server/db-content";
+import { updateUserPassword, logActivity } from "@/lib/server/db-supabase-content";
+import { hashPassword } from "@/lib/server/crypto";
 import type { ChangePasswordInput } from "@/types";
 
 export async function POST(request: Request) {
@@ -34,7 +35,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const dbUser = findUserById(user.id);
+    const dbUser = await findUserById(user.id);
     if (!dbUser) {
       return NextResponse.json({ error: "Pengguna tidak ditemukan." }, { status: 404 });
     }
@@ -44,8 +45,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Password lama Anda salah." }, { status: 400 });
     }
 
-    updateUser(user.id, { newPassword });
-    logActivity(user.id, user.name, "CHANGE_PASSWORD", "Security", "Mengubah password akun");
+    const { hash, salt } = hashPassword(newPassword);
+    await updateUserPassword(user.id, hash, salt);
+    await logActivity(user.id, user.name, "CHANGE_PASSWORD", "Security", "Mengubah password akun");
 
     return NextResponse.json({ success: true, message: "Password berhasil diperbarui." });
   } catch (err: unknown) {

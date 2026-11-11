@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { signJwt, verifyJwt } from "./crypto";
-import { findUserById, toAuthUser } from "./db-users";
+import { findUserById, toAuthUser } from "./db-supabase-users";
 import type { AuthUser, UserRole } from "@/types";
 
 export const SESSION_COOKIE_NAME = "space3ia16_session";
@@ -56,7 +56,7 @@ export async function getSessionUser(): Promise<AuthUser | null> {
     const payload = await verifyJwt<SessionPayload>(token);
     if (!payload?.sub) return null;
 
-    const dbUser = findUserById(payload.sub);
+    const dbUser = await findUserById(payload.sub);
     if (!dbUser || dbUser.status !== "active") return null;
 
     return toAuthUser(dbUser);
