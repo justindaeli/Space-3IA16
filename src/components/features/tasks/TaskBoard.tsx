@@ -45,10 +45,10 @@ export function TaskBoard({
     <section id="tugas" className="scroll-mt-24 space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 className="text-lg font-bold tracking-tight text-zinc-100 sm:text-xl">
+          <h2 className="text-lg font-bold tracking-tight text-slate-900 sm:text-xl">
             Papan Tugas
           </h2>
-          <p className="text-xs text-zinc-400">
+          <p className="text-xs text-slate-600">
             Pantau progres dan kelola pembagian tugas kelompok
           </p>
         </div>
@@ -62,22 +62,22 @@ export function TaskBoard({
       {/* Filter and Search Bar */}
       <div className="flex flex-wrap items-center gap-2.5">
         <div className="relative flex-1 min-w-[180px]">
-          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-zinc-500" />
+          <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-slate-500" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Cari tugas, deskripsi, atau penanggung jawab..."
-            className="w-full rounded-xl border border-zinc-800/80 bg-zinc-900/60 pl-8 pr-3 py-1.5 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-zinc-700"
+            className="w-full rounded-xl border border-slate-200/80 bg-white/60 pl-8 pr-3 py-1.5 text-xs text-slate-800 placeholder-slate-500 focus:outline-none focus:border-slate-300"
           />
         </div>
 
         <div className="flex items-center gap-1.5">
-          <Filter className="h-3.5 w-3.5 text-zinc-500" />
+          <Filter className="h-3.5 w-3.5 text-slate-500" />
           <select
             value={courseFilter}
             onChange={(e) => setCourseFilter(e.target.value)}
-            className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 px-2.5 py-1.5 text-xs text-zinc-300 focus:outline-none"
+            className="rounded-xl border border-slate-200/80 bg-white/60 px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none"
           >
             <option value="all">Semua Mata Kuliah</option>
             {courses.map((c) => (
@@ -105,7 +105,7 @@ export function TaskBoard({
               ? "Belum ada tugas kelompok yang dibuat. Mulai tambahkan tugas pertama."
               : "Tidak ada tugas yang cocok dengan filter atau kata kunci pencarian Anda."
           }
-          icon={<ListTodo className="h-6 w-6 text-blue-400" />}
+          icon={<ListTodo className="h-6 w-6 text-sky-700" />}
           action={
             tasks.length === 0 ? (
               <button type="button" onClick={onAddTask} className={primaryButtonClass}>
@@ -116,7 +116,7 @@ export function TaskBoard({
               <button
                 type="button"
                 onClick={() => { setSearch(""); setCourseFilter("all"); }}
-                className="text-xs text-blue-400 underline hover:text-blue-300"
+                className="text-xs text-sky-700 underline hover:text-sky-800"
               >
                 Reset Filter
               </button>

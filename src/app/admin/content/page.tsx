@@ -7,8 +7,8 @@ export default function AdminContentPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-zinc-50">Kelola Konten Akademik</h1>
-        <p className="text-xs text-zinc-400">
+        <h1 className="text-2xl font-bold tracking-tight text-slate-950">Kelola Konten Akademik</h1>
+        <p className="text-xs text-slate-600">
           Publikasi pengumuman siaran kelas dan arsip dokumen repository materi kuliah.
         </p>
       </div>

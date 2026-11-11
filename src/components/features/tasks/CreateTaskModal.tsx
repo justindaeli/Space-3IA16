@@ -71,20 +71,20 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/75 p-4 backdrop-blur-sm"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="relative w-full max-w-md rounded-2xl border border-zinc-800/90 bg-zinc-900 p-6 shadow-2xl shadow-black/80">
+      <div className="relative w-full max-w-md rounded-2xl border border-slate-200/90 bg-white p-6 shadow-2xl shadow-black/80">
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-5 right-5 text-zinc-400 hover:text-white"
+          className="absolute top-5 right-5 text-slate-600 hover:text-white"
         >
           <X className="h-5 w-5" />
         </button>
 
-        <h2 className="text-lg font-bold text-zinc-50">Tambah Tugas Baru</h2>
-        <p className="mt-1 text-xs text-zinc-400">Masukkan rincian tugas kelompok Space 3IA16.</p>
+        <h2 className="text-lg font-bold text-slate-950">Tambah Tugas Baru</h2>
+        <p className="mt-1 text-xs text-slate-600">Masukkan rincian tugas kelompok Space 3IA16.</p>
 
         {error && (
           <div className="mt-4 rounded-lg border border-red-900/60 bg-red-950/40 px-3 py-2 text-xs text-red-300">
@@ -94,7 +94,7 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
 
         <form onSubmit={handleSubmit} className="mt-5 space-y-3.5">
           <div>
-            <label className="mb-1 block text-xs font-medium text-zinc-300">Judul Tugas *</label>
+            <label className="mb-1 block text-xs font-medium text-slate-700">Judul Tugas *</label>
             <input
               type="text"
               value={form.title}
@@ -104,7 +104,7 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-zinc-300">Mata Kuliah *</label>
+            <label className="mb-1 block text-xs font-medium text-slate-700">Mata Kuliah *</label>
             <input
               type="text"
               value={form.course}
@@ -114,7 +114,7 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-zinc-300">Deadline *</label>
+            <label className="mb-1 block text-xs font-medium text-slate-700">Deadline *</label>
             <input
               type="datetime-local"
               value={form.deadline}
@@ -123,7 +123,7 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
             />
           </div>
           <div>
-            <label className="mb-1 block text-xs font-medium text-zinc-300">Deskripsi (Opsional)</label>
+            <label className="mb-1 block text-xs font-medium text-slate-700">Deskripsi (Opsional)</label>
             <textarea
               rows={2}
               value={form.description}

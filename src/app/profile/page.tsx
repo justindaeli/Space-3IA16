@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { ChangePasswordCard } from "@/components/features/profile/ChangePasswordCard";
 import { inputClass, primaryButtonClass } from "@/lib/ui-classes";
-import { User, Shield, CheckCircle2, AlertCircle } from "lucide-react";
+import { Shield, CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function ProfilePage() {
   const { user, refreshUser } = useAuth();
@@ -16,7 +16,7 @@ export default function ProfilePage() {
 
   if (!user) {
     return (
-      <div className="flex h-64 items-center justify-center text-sm text-zinc-500">
+      <div className="flex h-64 items-center justify-center text-sm text-slate-500">
         Memuat data akun...
       </div>
     );
@@ -51,31 +51,31 @@ export default function ProfilePage() {
   return (
     <div className="mx-auto max-w-4xl space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-zinc-50">Pengaturan Akun</h1>
-        <p className="text-xs text-zinc-400">Kelola identitas profil dan keamanan akun Space 3IA16.</p>
+        <h1 className="text-2xl font-bold tracking-tight text-slate-950">Pengaturan Akun</h1>
+        <p className="text-xs text-slate-600">Kelola identitas profil dan keamanan akun Space 3IA16.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Info Card */}
-        <article className="rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-6 shadow-lg shadow-black/20">
+        <article className="rounded-2xl border border-slate-200/80 bg-white/60 p-6 shadow-lg shadow-black/20">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-blue-500/30 bg-blue-500/10 text-lg font-bold text-blue-400">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-sky-600/30 bg-sky-600/10 text-lg font-bold text-sky-700">
               {user.initials}
             </div>
             <div>
-              <h2 className="text-base font-semibold text-zinc-100">{user.name}</h2>
+              <h2 className="text-base font-semibold text-slate-900">{user.name}</h2>
               <div className="flex items-center gap-2 mt-0.5">
                 <span
                   className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase ${
                     user.role === "admin"
-                      ? "border-indigo-500/30 bg-indigo-500/10 text-indigo-400"
-                      : "border-blue-500/30 bg-blue-500/10 text-blue-400"
+                      ? "border-navy-600/30 bg-navy-600/10 text-navy-700"
+                      : "border-sky-600/30 bg-sky-600/10 text-sky-700"
                   }`}
                 >
                   <Shield className="h-3 w-3" />
                   {user.role}
                 </span>
-                <span className="text-xs text-zinc-400">@{user.username}</span>
+                <span className="text-xs text-slate-600">@{user.username}</span>
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@ export default function ProfilePage() {
 
           <form onSubmit={handleUpdateName} className="mt-5 space-y-3.5">
             <div>
-              <label className="mb-1 block text-xs font-medium text-zinc-300">Nama Lengkap</label>
+              <label className="mb-1 block text-xs font-medium text-slate-700">Nama Lengkap</label>
               <input
                 type="text"
                 value={name}
@@ -108,7 +108,7 @@ export default function ProfilePage() {
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-zinc-300">Email Kampus</label>
+              <label className="mb-1 block text-xs font-medium text-slate-700">Email Kampus</label>
               <input
                 type="email"
                 disabled
@@ -117,7 +117,7 @@ export default function ProfilePage() {
               />
             </div>
             <div>
-              <label className="mb-1 block text-xs font-medium text-zinc-300">Username</label>
+              <label className="mb-1 block text-xs font-medium text-slate-700">Username</label>
               <input
                 type="text"
                 disabled

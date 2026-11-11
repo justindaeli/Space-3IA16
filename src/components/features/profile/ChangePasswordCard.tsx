@@ -54,10 +54,10 @@ export function ChangePasswordCard() {
   };
 
   return (
-    <article className="rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-6 shadow-lg shadow-black/20">
+    <article className="rounded-2xl border border-slate-200/80 bg-white/60 p-6 shadow-lg shadow-black/20">
       <div className="flex items-center gap-2 mb-4">
-        <Lock className="h-5 w-5 text-blue-400" />
-        <h3 className="text-base font-semibold text-zinc-100">Ubah Password Akun</h3>
+        <Lock className="h-5 w-5 text-sky-700" />
+        <h3 className="text-base font-semibold text-slate-900">Ubah Password Akun</h3>
       </div>
 
       {error && (
@@ -76,7 +76,7 @@ export function ChangePasswordCard() {
 
       <form onSubmit={handleSubmit} className="space-y-3.5">
         <div>
-          <label className="mb-1 block text-xs font-medium text-zinc-300">Password Saat Ini</label>
+          <label className="mb-1 block text-xs font-medium text-slate-700">Password Saat Ini</label>
           <input
             type="password"
             value={currentPassword}
@@ -86,7 +86,7 @@ export function ChangePasswordCard() {
           />
         </div>
         <div>
-          <label className="mb-1 block text-xs font-medium text-zinc-300">Password Baru</label>
+          <label className="mb-1 block text-xs font-medium text-slate-700">Password Baru</label>
           <input
             type="password"
             value={newPassword}
@@ -96,7 +96,7 @@ export function ChangePasswordCard() {
           />
         </div>
         <div>
-          <label className="mb-1 block text-xs font-medium text-zinc-300">Konfirmasi Password Baru</label>
+          <label className="mb-1 block text-xs font-medium text-slate-700">Konfirmasi Password Baru</label>
           <input
             type="password"
             value={confirmPassword}

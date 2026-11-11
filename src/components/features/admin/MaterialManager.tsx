@@ -43,10 +43,10 @@ export function MaterialManager() {
   };
 
   return (
-    <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/60 p-5 space-y-4">
+    <div className="rounded-2xl border border-slate-200/80 bg-white/60 p-5 space-y-4">
       <div className="flex items-center gap-2">
         <BookOpen className="h-4 w-4 text-amber-400" />
-        <h2 className="text-sm font-semibold text-zinc-100">Tambah Berkas Materi Kuliah</h2>
+        <h2 className="text-sm font-semibold text-slate-900">Tambah Berkas Materi Kuliah</h2>
       </div>
 
       <form onSubmit={handleAdd} className="space-y-3">
@@ -91,17 +91,17 @@ export function MaterialManager() {
         </div>
       </form>
 
-      <div className="divide-y divide-zinc-800/60">
+      <div className="divide-y divide-slate-200/60">
         {materials.length === 0 ? (
-          <p className="py-3 text-center text-xs text-zinc-500">Materi yang baru ditambahkan sesi ini akan tampil di sini.</p>
+          <p className="py-3 text-center text-xs text-slate-500">Materi yang baru ditambahkan sesi ini akan tampil di sini.</p>
         ) : (
           materials.map((m) => (
             <div key={m.id} className="py-2.5 flex items-center justify-between gap-3 text-xs">
               <div>
-                <p className="font-medium text-zinc-200">{m.title}</p>
-                <p className="text-[11px] text-zinc-400">{m.course} · {m.type}</p>
+                <p className="font-medium text-slate-800">{m.title}</p>
+                <p className="text-[11px] text-slate-600">{m.course} · {m.type}</p>
               </div>
-              <button onClick={() => handleDelete(m.id)} className="p-1 text-zinc-500 hover:text-red-400">
+              <button onClick={() => handleDelete(m.id)} className="p-1 text-slate-500 hover:text-red-400">
                 <Trash2 className="h-3.5 w-3.5" />
               </button>
             </div>

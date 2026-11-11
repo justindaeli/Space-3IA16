@@ -60,8 +60,8 @@ export default function AdminUsersPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-zinc-50">Kelola Pengguna</h1>
-          <p className="text-xs text-zinc-400">Atur hak akses (RBAC), data mahasiswa, dan status akun.</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-950">Kelola Pengguna</h1>
+          <p className="text-xs text-slate-600">Atur hak akses (RBAC), data mahasiswa, dan status akun.</p>
         </div>
         <button
           onClick={() => { setSelectedUser(null); setModalOpen(true); }}
@@ -74,19 +74,19 @@ export default function AdminUsersPage() {
 
       <div className="flex flex-wrap items-center gap-3">
         <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-500" />
+          <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-500" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Cari nama, email, username..."
-            className="w-full rounded-xl border border-zinc-800 bg-zinc-900/80 pl-9 pr-3 py-2 text-xs text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-zinc-600"
+            className="w-full rounded-xl border border-slate-200 bg-white/80 pl-9 pr-3 py-2 text-xs text-slate-800 placeholder-slate-500 focus:outline-none focus:border-slate-400"
           />
         </div>
         <select
           value={roleFilter}
           onChange={(e) => setRoleFilter(e.target.value)}
-          className="rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-xs text-zinc-200 focus:outline-none"
+          className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:outline-none"
         >
           <option value="all">Semua Role</option>
           <option value="admin">Administrator</option>
@@ -95,7 +95,7 @@ export default function AdminUsersPage() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="rounded-xl border border-zinc-800 bg-zinc-900 px-3 py-2 text-xs text-zinc-200 focus:outline-none"
+          className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-800 focus:outline-none"
         >
           <option value="all">Semua Status</option>
           <option value="active">Aktif</option>
@@ -103,9 +103,9 @@ export default function AdminUsersPage() {
         </select>
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border border-zinc-800/80 bg-zinc-900/60 shadow-lg">
-        <table className="w-full text-left text-xs text-zinc-300">
-          <thead className="border-b border-zinc-800 bg-zinc-900/90 text-zinc-400">
+      <div className="overflow-x-auto rounded-2xl border border-slate-200/80 bg-white/60 shadow-lg">
+        <table className="w-full text-left text-xs text-slate-700">
+          <thead className="border-b border-slate-200 bg-white/90 text-slate-600">
             <tr>
               <th className="p-3.5">Pengguna</th>
               <th className="p-3.5">Username</th>
@@ -114,11 +114,11 @@ export default function AdminUsersPage() {
               <th className="p-3.5 text-right">Aksi</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-zinc-800/60">
+          <tbody className="divide-y divide-slate-200/60">
             {loading ? (
-              <tr><td colSpan={5} className="p-6 text-center text-zinc-500">Memuat pengguna...</td></tr>
+              <tr><td colSpan={5} className="p-6 text-center text-slate-500">Memuat pengguna...</td></tr>
             ) : users.length === 0 ? (
-              <tr><td colSpan={5} className="p-6 text-center text-zinc-500">Tidak ada pengguna.</td></tr>
+              <tr><td colSpan={5} className="p-6 text-center text-slate-500">Tidak ada pengguna.</td></tr>
             ) : (
               users.map((u) => (
                 <UserTableRow

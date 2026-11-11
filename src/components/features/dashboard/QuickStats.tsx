@@ -37,9 +37,9 @@ export function QuickStats({ stats }: QuickStatsProps) {
       label: "Tugas Aktif",
       value: String(stats.activeTaskCount),
       subtext: "Perlu diselesaikan kelompok",
-      icon: <CheckCircle2 className="h-5 w-5 text-blue-400" />,
-      iconBg: "bg-blue-500/10",
-      iconBorder: "border-blue-500/20",
+      icon: <CheckCircle2 className="h-5 w-5 text-sky-700" />,
+      iconBg: "bg-sky-600/10",
+      iconBorder: "border-sky-600/20",
     },
     {
       label: "Deadline Terdekat",
@@ -53,38 +53,26 @@ export function QuickStats({ stats }: QuickStatsProps) {
       label: "Pengumuman Terbaru",
       value: stats.latestAnnouncement?.title ?? "Belum ada pengumuman",
       subtext: "Informasi perkuliahan terkini",
-      icon: <Megaphone className="h-5 w-5 text-indigo-400" />,
-      iconBg: "bg-indigo-500/10",
-      iconBorder: "border-indigo-500/20",
+      icon: <Megaphone className="h-5 w-5 text-navy-700" />,
+      iconBg: "bg-navy-600/10",
+      iconBorder: "border-navy-600/20",
     },
   ];
 
   return (
-    <section id="stats" className="grid scroll-mt-24 grid-cols-1 gap-4 sm:grid-cols-3">
-      {items.map((item) => (
-        <article
-          key={item.label}
-          className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-zinc-800/80 bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 p-5 shadow-lg shadow-black/20 transition-all duration-200 hover:-translate-y-1 hover:border-zinc-700 hover:shadow-xl hover:shadow-blue-500/5"
-        >
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-zinc-400">
-              {item.label}
-            </span>
-            <div
-              className={`flex h-10 w-10 items-center justify-center rounded-xl border ${item.iconBorder} ${item.iconBg} transition-transform duration-200 group-hover:scale-105`}
-            >
-              {item.icon}
+    <section id="stats" className="scroll-mt-24 border-y border-slate-300 bg-white">
+      <div className="grid grid-cols-1 divide-y divide-slate-300 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        {items.map((item) => (
+          <article key={item.label} className="flex min-h-28 items-center gap-4 px-5 py-4">
+            <div className="shrink-0">{item.icon}</div>
+            <div className="min-w-0">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">{item.label}</p>
+              <p className="mt-1 truncate text-lg font-bold text-slate-950">{item.value}</p>
+              <p className="mt-0.5 truncate text-xs text-slate-600">{item.subtext}</p>
             </div>
-          </div>
-
-          <div className="mt-4">
-            <p className="line-clamp-2 text-xl font-bold tracking-tight text-zinc-100 sm:text-2xl">
-              {item.value}
-            </p>
-            <p className="mt-1 text-xs text-zinc-400">{item.subtext}</p>
-          </div>
-        </article>
-      ))}
+          </article>
+        ))}
+      </div>
     </section>
   );
 }

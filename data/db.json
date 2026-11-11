@@ -167,6 +167,24 @@
   ],
   "activities": [
     {
+      "id": "act-1794390657320-t6mj",
+      "userId": "u-admin",
+      "userName": "Administrator 3IA16",
+      "action": "USER_LOGIN",
+      "target": "Authentication",
+      "details": "Berhasil masuk ke platform",
+      "createdAt": "2026-11-11T09:50:57.320Z"
+    },
+    {
+      "id": "act-1794390491373-rc6k",
+      "userId": "u1",
+      "userName": "Justin Daeli",
+      "action": "USER_LOGOUT",
+      "target": "Authentication",
+      "details": "Keluar dari platform",
+      "createdAt": "2026-11-11T09:48:11.373Z"
+    },
+    {
       "id": "act-1793927467229-7emq",
       "userId": "u1",
       "userName": "Justin Daeli",

@@ -12,7 +12,7 @@ const TYPE_CONFIG: Record<MaterialType, { label: string; icon: ReactNode; color:
   modul: {
     label: "Modul",
     icon: <FileText className="h-4 w-4" />,
-    color: "text-blue-400 bg-blue-500/10 border-blue-500/20",
+    color: "text-sky-700 bg-sky-600/10 border-sky-600/20",
   },
   slide: {
     label: "Slide",
@@ -41,7 +41,7 @@ export function MaterialItem({ material }: MaterialItemProps) {
         </div>
 
         <div className="min-w-0">
-          <p className="truncate text-sm font-medium text-zinc-100 group-hover:text-white">
+          <p className="truncate text-sm font-medium text-slate-900 group-hover:text-sky-800">
             {material.title}
           </p>
           <div className="mt-1 flex flex-wrap items-center gap-2">
@@ -51,7 +51,7 @@ export function MaterialItem({ material }: MaterialItemProps) {
               <span className={`h-1 w-1 rounded-full ${courseStyle.dot}`} />
               {material.course}
             </span>
-            <span className="text-[11px] text-zinc-400">
+            <span className="text-[11px] text-slate-600">
               {typeConfig.label} · Diunggah {formatDate(material.uploadedAt)}
             </span>
           </div>
@@ -63,7 +63,7 @@ export function MaterialItem({ material }: MaterialItemProps) {
           href={targetUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 rounded-lg border border-zinc-700/80 bg-zinc-800/80 px-2.5 py-1.5 text-xs font-medium text-zinc-300 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-600 hover:bg-zinc-700 hover:text-white"
+          className="inline-flex items-center gap-1 rounded-lg border border-slate-300/80 bg-slate-200/80 px-2.5 py-1.5 text-xs font-medium text-slate-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-300 hover:text-white"
         >
           <Eye className="h-3.5 w-3.5" />
           <span>Lihat</span>
@@ -71,7 +71,7 @@ export function MaterialItem({ material }: MaterialItemProps) {
         <a
           href={targetUrl}
           download
-          className="inline-flex items-center gap-1 rounded-lg border border-zinc-700/80 bg-zinc-800/80 px-2.5 py-1.5 text-xs font-medium text-zinc-300 transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-600 hover:bg-zinc-700 hover:text-white"
+          className="inline-flex items-center gap-1 rounded-lg border border-slate-300/80 bg-slate-200/80 px-2.5 py-1.5 text-xs font-medium text-slate-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-300 hover:text-white"
         >
           <Download className="h-3.5 w-3.5" />
           <span>Unduh</span>

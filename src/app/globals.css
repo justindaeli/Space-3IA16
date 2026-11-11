@@ -1,21 +1,26 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
+  --background: #f5f7fa;
+  --foreground: #172033;
+  --campus-navy: #17324d;
+  --campus-blue: #246b9f;
+  --campus-gold: #c58b2a;
+  --paper: #ffffff;
+  --line: #d9e1e8;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-navy-600: #244e70;
+  --color-navy-700: #17324d;
+  --color-navy-800: #10263b;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-html {
-  color-scheme: dark;
-}
-
+html { color-scheme: light; scroll-behavior: smooth; }
 body {
   background: var(--background);
   color: var(--foreground);
@@ -23,18 +28,11 @@ body {
   overflow-x: hidden;
 }
 
-@keyframes skeleton-shimmer {
-  0% {
-    opacity: 0.35;
-  }
-  50% {
-    opacity: 0.7;
-  }
-  100% {
-    opacity: 0.35;
-  }
-}
+::selection { background: #cfe5f5; color: #10263b; }
 
-.skeleton-pulse {
-  animation: skeleton-shimmer 1.8s ease-in-out infinite;
-}
+@keyframes skeleton-shimmer { 0%, 100% { opacity: .45; } 50% { opacity: .85; } }
+.skeleton-pulse { animation: skeleton-shimmer 1.8s ease-in-out infinite; }
+
+/* Campus surface language: quiet paper, clear borders, no artificial glow. */
+input, select, textarea { color-scheme: light; }
+button, a, input, select, textarea { transition-duration: 160ms; }

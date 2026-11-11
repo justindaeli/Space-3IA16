@@ -12,12 +12,12 @@ interface TaskColumnProps {
 
 export function TaskColumn({ title, tasks, pendingTaskId, onMoveTask }: TaskColumnProps) {
   return (
-    <section className="flex min-h-64 flex-col rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-4 shadow-sm">
+    <section className="flex min-h-64 flex-col border-t-2 border-slate-900 bg-white px-3 py-4">
       <header className="mb-3.5 flex items-center justify-between px-1">
         <div className="flex items-center gap-2">
-          <h3 className="text-sm font-semibold tracking-tight text-zinc-100">{title}</h3>
+          <h3 className="text-sm font-semibold tracking-tight text-slate-900">{title}</h3>
         </div>
-        <span className="flex h-5 min-w-5 items-center justify-center rounded-full border border-zinc-700/80 bg-zinc-800 px-1.5 text-[11px] font-semibold text-zinc-300">
+        <span className="flex h-5 min-w-5 items-center justify-center rounded-full border border-slate-300/80 bg-slate-200 px-1.5 text-[11px] font-semibold text-slate-700">
           {tasks.length}
         </span>
       </header>
@@ -26,7 +26,7 @@ export function TaskColumn({ title, tasks, pendingTaskId, onMoveTask }: TaskColu
         <EmptyState
           title="Tidak ada tugas"
           description={`Kolom ${title} saat ini kosong.`}
-          icon={<CheckSquare className="h-5 w-5 text-zinc-500" />}
+          icon={<CheckSquare className="h-5 w-5 text-slate-500" />}
         />
       ) : (
         <div className="flex flex-col gap-3">

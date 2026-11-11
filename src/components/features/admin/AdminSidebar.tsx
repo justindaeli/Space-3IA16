@@ -24,14 +24,14 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-full shrink-0 border-b border-zinc-800/80 bg-zinc-900/60 p-4 md:w-60 md:min-h-[calc(100vh-5rem)] md:border-r md:border-b-0 md:p-5">
+    <aside className="w-full shrink-0 border-b border-slate-200/80 bg-white/60 p-4 md:w-60 md:min-h-[calc(100vh-5rem)] md:border-r md:border-b-0 md:p-5">
       <div className="mb-6 flex items-center gap-2 px-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-indigo-500/30 bg-indigo-500/10 text-indigo-400">
+        <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-navy-600/30 bg-navy-600/10 text-navy-700">
           <Shield className="h-4 w-4" />
         </div>
         <div>
-          <h2 className="text-sm font-bold text-zinc-100">Admin Console</h2>
-          <p className="text-[10px] text-zinc-400">Space 3IA16 RBAC</p>
+          <h2 className="text-sm font-bold text-slate-900">Admin Console</h2>
+          <p className="text-[10px] text-slate-600">Space 3IA16 RBAC</p>
         </div>
       </div>
 
@@ -49,8 +49,8 @@ export function AdminSidebar() {
               href={item.href}
               className={`flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium transition-all ${
                 isActive
-                  ? "bg-indigo-600/20 text-indigo-300 border border-indigo-500/30 shadow-sm"
-                  : "text-zinc-400 hover:bg-zinc-800/80 hover:text-zinc-200"
+                  ? "bg-navy-700/20 text-navy-800 border border-navy-600/30 shadow-sm"
+                  : "text-slate-600 hover:bg-slate-200/80 hover:text-slate-800"
               }`}
             >
               <Icon className="h-4 w-4 shrink-0" />
@@ -60,10 +60,10 @@ export function AdminSidebar() {
         })}
       </nav>
 
-      <div className="mt-6 border-t border-zinc-800/80 pt-4 px-2 hidden md:block">
+      <div className="mt-6 border-t border-slate-200/80 pt-4 px-2 hidden md:block">
         <Link
           href="/"
-          className="flex items-center gap-2 text-xs font-medium text-zinc-400 transition-colors hover:text-zinc-200"
+          className="flex items-center gap-2 text-xs font-medium text-slate-600 transition-colors hover:text-slate-800"
         >
           <ArrowLeft className="h-3.5 w-3.5" />
           <span>Kembali ke Kelas</span>
