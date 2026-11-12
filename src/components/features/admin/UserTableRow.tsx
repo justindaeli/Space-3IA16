@@ -27,7 +27,7 @@ export function UserTableRow({ user, onEdit, onDelete }: UserTableRowProps) {
         <span
           className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase ${
             isAdmin
-              ? "bg-navy-600/10 text-navy-700 border border-navy-600/20"
+              ? "bg-sky-50 text-sky-700 border border-sky-200"
               : "bg-sky-600/10 text-sky-700 border border-sky-600/20"
           }`}
         >
@@ -38,7 +38,7 @@ export function UserTableRow({ user, onEdit, onDelete }: UserTableRowProps) {
       <td className="p-3.5">
         <span
           className={`inline-flex items-center gap-1 text-[11px] ${
-            isActive ? "text-emerald-400" : "text-slate-500"
+            isActive ? "text-emerald-600" : "text-slate-500"
           }`}
         >
           {isActive ? <CheckCircle className="h-3.5 w-3.5" /> : <XCircle className="h-3.5 w-3.5" />}
@@ -48,14 +48,14 @@ export function UserTableRow({ user, onEdit, onDelete }: UserTableRowProps) {
       <td className="p-3.5 text-right space-x-2">
         <button
           onClick={() => onEdit(user)}
-          className="p-1.5 rounded-lg border border-slate-300 bg-slate-200 text-slate-700 hover:text-white hover:bg-slate-300"
+          className="p-1.5 rounded-lg border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900"
           title="Edit Pengguna"
         >
           <Edit3 className="h-3.5 w-3.5" />
         </button>
         <button
           onClick={() => onDelete(user.id, user.name)}
-          className="p-1.5 rounded-lg border border-red-900/50 bg-red-950/30 text-red-400 hover:bg-red-900/50"
+          className="p-1.5 rounded-lg border border-red-200 bg-red-50 text-red-500 hover:bg-red-100"
           title="Hapus Pengguna"
         >
           <Trash2 className="h-3.5 w-3.5" />

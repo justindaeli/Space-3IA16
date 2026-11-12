@@ -50,11 +50,11 @@ export default function LoginPage() {
 
   return (
     <div className="relative flex min-h-[75vh] items-center justify-center py-8">
-      {/* Ambient background glow */}
-      <div className="pointer-events-none absolute -top-10 h-72 w-72 rounded-full bg-sky-600/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-10 h-72 w-72 rounded-full bg-navy-600/10 blur-3xl" />
+      {/* Subtle background accent */}
+      <div className="pointer-events-none absolute -top-10 h-72 w-72 rounded-full bg-sky-100/60 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-10 h-72 w-72 rounded-full bg-slate-100/60 blur-3xl" />
 
-      <div className="relative w-full max-w-md rounded-2xl border border-slate-200/90 bg-gradient-to-b from-white/90 via-white/80 to-slate-50 p-6 shadow-2xl shadow-black/60 backdrop-blur-md sm:p-8">
+      <div className="relative w-full max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-lg sm:p-8">
         <Link
           href="/"
           className="mb-4 inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 transition-colors hover:text-slate-800"
@@ -77,9 +77,9 @@ export default function LoginPage() {
         {error && (
           <div
             role="alert"
-            className="mb-5 flex items-start gap-2.5 rounded-xl border border-red-900/60 bg-red-950/40 p-3 text-xs text-red-300"
+            className="mb-5 flex items-start gap-2.5 rounded-lg border border-red-200 bg-red-50 p-3 text-xs text-red-700"
           >
-            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-400" />
+            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-red-500" />
             <span>{error}</span>
           </div>
         )}
@@ -146,13 +146,13 @@ export default function LoginPage() {
         </form>
 
         {/* Demo Accounts Quick-fill */}
-        <div className="mt-6 border-t border-slate-200/80 pt-4">
+        <div className="mt-6 border-t border-slate-200 pt-4">
           <p className="mb-2 text-[11px] font-medium text-slate-600">Pilih Akun Uji Coba Cepat:</p>
           <div className="grid grid-cols-2 gap-2">
             <button
               type="button"
               onClick={() => fillDemo("admin@space3ia16.id", "admin123")}
-              className="flex items-center justify-center gap-1.5 rounded-lg border border-navy-600/30 bg-navy-600/10 px-2 py-1.5 text-xs font-medium text-navy-800 transition-all hover:bg-navy-600/20"
+              className="flex items-center justify-center gap-1.5 rounded-lg border border-sky-200 bg-sky-50 px-2 py-1.5 text-xs font-medium text-sky-800 transition-colors hover:bg-sky-100"
             >
               <Shield className="h-3 w-3" />
               <span>Akun Admin</span>

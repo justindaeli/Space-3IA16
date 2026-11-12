@@ -68,7 +68,7 @@ export function TaskBoard({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Cari tugas, deskripsi, atau penanggung jawab..."
-            className="w-full rounded-xl border border-slate-200/80 bg-white/60 pl-8 pr-3 py-1.5 text-xs text-slate-800 placeholder-slate-500 focus:outline-none focus:border-slate-300"
+            className="w-full rounded-lg border border-slate-200 bg-white pl-8 pr-3 py-1.5 text-xs text-slate-800 placeholder-slate-500 focus:outline-none focus:border-sky-500"
           />
         </div>
 
@@ -77,7 +77,7 @@ export function TaskBoard({
           <select
             value={courseFilter}
             onChange={(e) => setCourseFilter(e.target.value)}
-            className="rounded-xl border border-slate-200/80 bg-white/60 px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none"
+            className="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none"
           >
             <option value="all">Semua Mata Kuliah</option>
             {courses.map((c) => (
@@ -90,9 +90,9 @@ export function TaskBoard({
       {actionError && (
         <div
           role="alert"
-          className="flex items-center gap-2 rounded-xl border border-red-900/60 bg-red-950/40 px-4 py-2.5 text-xs text-red-300 shadow-sm"
+          className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-2.5 text-xs text-red-700 shadow-sm"
         >
-          <AlertTriangle className="h-4 w-4 shrink-0 text-red-400" />
+          <AlertTriangle className="h-4 w-4 shrink-0 text-red-500" />
           <span>{actionError}</span>
         </div>
       )}

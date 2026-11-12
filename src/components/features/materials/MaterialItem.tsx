@@ -63,7 +63,7 @@ export function MaterialItem({ material }: MaterialItemProps) {
           href={targetUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 rounded-lg border border-slate-300/80 bg-slate-200/80 px-2.5 py-1.5 text-xs font-medium text-slate-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-300 hover:text-white"
+          className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900"
         >
           <Eye className="h-3.5 w-3.5" />
           <span>Lihat</span>
@@ -71,7 +71,7 @@ export function MaterialItem({ material }: MaterialItemProps) {
         <a
           href={targetUrl}
           download
-          className="inline-flex items-center gap-1 rounded-lg border border-slate-300/80 bg-slate-200/80 px-2.5 py-1.5 text-xs font-medium text-slate-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-300 hover:text-white"
+          className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-50 hover:text-slate-900"
         >
           <Download className="h-3.5 w-3.5" />
           <span>Unduh</span>

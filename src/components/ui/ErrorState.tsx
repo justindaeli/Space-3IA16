@@ -18,9 +18,9 @@ export function ErrorState({
   return (
     <div
       role="alert"
-      className="flex h-64 w-full flex-col items-center justify-center gap-4 rounded-2xl border border-red-900/40 bg-gradient-to-b from-red-950/20 to-slate-50 px-6 text-center"
+      className="flex h-64 w-full flex-col items-center justify-center gap-4 rounded-lg border border-red-200 bg-red-50/50 px-6 text-center"
     >
-      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-red-800/40 bg-red-950/50 text-red-400 shadow-lg shadow-red-950/40">
+      <div      className="flex h-12 w-12 items-center justify-center rounded-lg border border-red-200 bg-red-50 text-red-500">
         <AlertCircle className="h-6 w-6 stroke-[1.75]" />
       </div>
       <div>
@@ -31,7 +31,7 @@ export function ErrorState({
         <button
           type="button"
           onClick={onRetry}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-slate-200/90 px-4 py-2 text-xs font-medium text-slate-800 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-300 hover:text-white"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-4 py-2 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
         >
           <RefreshCw className="h-3.5 w-3.5" />
           Coba Lagi

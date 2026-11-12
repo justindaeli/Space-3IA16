@@ -78,15 +78,15 @@ export function UserModal({ isOpen, onClose, onSave, editUser }: UserModalProps)
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/75 p-4 backdrop-blur-sm">
-      <div className="relative w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
-        <button onClick={onClose} className="absolute top-5 right-5 text-slate-600 hover:text-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-sm">
+      <div className="relative w-full max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-xl">
+        <button onClick={onClose} className="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition-colors">
           <X className="h-5 w-5" />
         </button>
         <h2 className="text-lg font-bold text-slate-900">
           {isEdit ? "Edit Pengguna" : "Tambah Pengguna Baru"}
         </h2>
-        {error && <p className="mt-3 text-xs text-red-400 bg-red-950/40 p-2.5 rounded-lg border border-red-900/60">{error}</p>}
+        {error && <p className="mt-3 text-xs text-red-700 bg-red-50 p-2.5 rounded-lg border border-red-200">{error}</p>}
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-3">
           <div>

@@ -51,10 +51,10 @@ export function TaskCard({ task, isPending, onStatusChange }: TaskCardProps) {
         <span
           className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-medium ${
             task.status === "done"
-              ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+              ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
               : isOverdue
-              ? "bg-red-500/10 text-red-400 border border-red-500/20"
-              : "bg-amber-500/10 text-amber-400 border border-amber-500/20"
+              ? "bg-red-50 text-red-700 border border-red-200"
+              : "bg-amber-50 text-amber-700 border border-amber-200"
           }`}
         >
           {task.status === "done" ? (

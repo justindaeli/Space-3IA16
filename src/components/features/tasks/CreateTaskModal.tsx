@@ -71,14 +71,14 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/75 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-sm"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="relative w-full max-w-md rounded-2xl border border-slate-200/90 bg-white p-6 shadow-2xl shadow-black/80">
+      <div className="relative w-full max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-xl">
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-5 right-5 text-slate-600 hover:text-white"
+          className="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition-colors"
         >
           <X className="h-5 w-5" />
         </button>
@@ -87,7 +87,7 @@ export function CreateTaskModal({ isOpen, onClose, onTaskCreated }: CreateTaskMo
         <p className="mt-1 text-xs text-slate-600">Masukkan rincian tugas kelompok Space 3IA16.</p>
 
         {error && (
-          <div className="mt-4 rounded-lg border border-red-900/60 bg-red-950/40 px-3 py-2 text-xs text-red-300">
+          <div className="mt-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700">
             {error}
           </div>
         )}

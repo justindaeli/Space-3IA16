@@ -53,15 +53,15 @@ export function QuickStats({ stats }: QuickStatsProps) {
       label: "Pengumuman Terbaru",
       value: stats.latestAnnouncement?.title ?? "Belum ada pengumuman",
       subtext: "Informasi perkuliahan terkini",
-      icon: <Megaphone className="h-5 w-5 text-navy-700" />,
-      iconBg: "bg-navy-600/10",
-      iconBorder: "border-navy-600/20",
+      icon: <Megaphone className="h-5 w-5 text-sky-700" />,
+      iconBg: "bg-sky-50",
+      iconBorder: "border-sky-200",
     },
   ];
 
   return (
-    <section id="stats" className="scroll-mt-24 border-y border-slate-300 bg-white">
-      <div className="grid grid-cols-1 divide-y divide-slate-300 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+    <section id="stats" className="scroll-mt-24 rounded-lg border border-slate-200 bg-white">
+      <div className="grid grid-cols-1 divide-y divide-slate-100 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
         {items.map((item) => (
           <article key={item.label} className="flex min-h-28 items-center gap-4 px-5 py-4">
             <div className="shrink-0">{item.icon}</div>

@@ -1,6 +1,6 @@
 export function WelcomeHeader() {
   return (
-    <section className="border-y-4 border-sky-700 bg-white px-1 py-6 sm:py-8">
+    <section className="border-b border-slate-200 bg-white px-1 py-6 sm:py-8">
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
         <div>
           <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-sky-700">Portal Kelas · Semester Ganjil & Genap 2026</p>

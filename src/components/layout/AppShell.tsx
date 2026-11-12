@@ -19,13 +19,14 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b-2 border-slate-900 bg-white">
+      <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
         <div className="flex w-full items-center justify-between gap-4 px-4 py-3 sm:px-8 lg:px-10">
           <Link
             href="/"
-            className="group flex items-center gap-2.5 text-sm font-semibold tracking-tight text-slate-900 transition-all duration-200 hover:-translate-y-px"
+            aria-label="Space 3IA16 beranda"
+            className="group flex items-center gap-2.5 text-sm font-semibold tracking-tight text-slate-900 transition-colors duration-200 hover:text-sky-700"
           >
-            <div className="flex h-7 w-7 items-center justify-center border border-slate-900 bg-sky-50 text-sky-800">
+            <div className="flex h-7 w-7 items-center justify-center rounded-md border border-slate-200 bg-white text-sky-800">
               <Layers className="h-4 w-4" />
             </div>
             <span className="font-bold text-slate-950">Space 3IA16</span>
@@ -53,7 +54,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                 {isAdmin && (
                   <Link
                     href="/admin"
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-navy-600/30 bg-navy-600/10 px-2.5 py-1 text-xs font-medium text-navy-800 transition-all hover:bg-navy-600/20"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-sky-200 bg-sky-50 px-2.5 py-1 text-xs font-medium text-sky-800 transition-colors hover:bg-sky-100"
                   >
                     <Shield className="h-3.5 w-3.5" />
                     <span className="hidden sm:inline">Admin Hub</span>
@@ -74,7 +75,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   type="button"
                   onClick={() => void logout()}
                   title="Keluar"
-                  className="flex h-7 w-7 items-center justify-center rounded-lg border border-slate-200 bg-white/60 text-slate-600 transition-colors hover:border-red-900/40 hover:bg-red-950/20 hover:text-red-300"
+                  className="flex h-8 w-8 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-600 transition-colors hover:border-red-200 hover:bg-red-50 hover:text-red-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
                 >
                   <LogOut className="h-3.5 w-3.5" />
                 </button>
@@ -82,7 +83,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             ) : (
               <Link
                 href="/login"
-                className="inline-flex items-center gap-1.5 rounded-lg border border-sky-600/30 bg-gradient-to-r from-sky-700/90 to-navy-700/90 px-3 py-1.5 text-xs font-semibold text-white shadow-sm shadow-sky-600/20 transition-all duration-200 hover:-translate-y-px hover:from-sky-600 hover:to-navy-600"
+                className="inline-flex items-center gap-1.5 rounded-lg border border-sky-300 bg-sky-700 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-sky-600"
               >
                 <LogIn className="h-3.5 w-3.5" />
                 <span>Masuk</span>
@@ -90,6 +91,19 @@ export function AppShell({ children }: { children: ReactNode }) {
             )}
           </div>
         </div>
+        {!isAdminSection && (
+          <nav aria-label="Navigasi mobile" className="flex gap-1 overflow-x-auto border-t border-slate-100 px-4 py-2 md:hidden">
+            {navItems.map((item) => (
+              <Link
+                key={`mobile-${item.href}`}
+                href={item.href}
+                className="shrink-0 rounded-md px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        )}
       </header>
 
       <main className="flex w-full flex-1 flex-col gap-8 px-4 py-6 sm:px-8 sm:py-8 lg:px-10">

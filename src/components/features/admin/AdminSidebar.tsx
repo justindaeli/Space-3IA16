@@ -24,9 +24,9 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-full shrink-0 border-b border-slate-200/80 bg-white/60 p-4 md:w-60 md:min-h-[calc(100vh-5rem)] md:border-r md:border-b-0 md:p-5">
+    <aside className="w-full shrink-0 border-b border-slate-200 bg-white p-4 md:w-60 md:min-h-[calc(100vh-5rem)] md:border-r md:border-b-0 md:p-5">
       <div className="mb-6 flex items-center gap-2 px-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-navy-600/30 bg-navy-600/10 text-navy-700">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-sky-200 bg-sky-50 text-sky-700">
           <Shield className="h-4 w-4" />
         </div>
         <div>
@@ -47,10 +47,10 @@ export function AdminSidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-medium transition-all ${
+              className={`flex items-center gap-2.5 rounded-lg px-3 py-2 text-xs font-medium transition-colors ${
                 isActive
-                  ? "bg-navy-700/20 text-navy-800 border border-navy-600/30 shadow-sm"
-                  : "text-slate-600 hover:bg-slate-200/80 hover:text-slate-800"
+                  ? "bg-sky-50 text-sky-800 border border-sky-200"
+                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-800"
               }`}
             >
               <Icon className="h-4 w-4 shrink-0" />
@@ -60,7 +60,7 @@ export function AdminSidebar() {
         })}
       </nav>
 
-      <div className="mt-6 border-t border-slate-200/80 pt-4 px-2 hidden md:block">
+      <div className="mt-6 border-t border-slate-200 pt-4 px-2 hidden md:block">
         <Link
           href="/"
           className="flex items-center gap-2 text-xs font-medium text-slate-600 transition-colors hover:text-slate-800"

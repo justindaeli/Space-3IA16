@@ -57,9 +57,9 @@ export default function ProfilePage() {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Info Card */}
-        <article className="rounded-2xl border border-slate-200/80 bg-white/60 p-6 shadow-lg shadow-black/20">
+        <article className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
           <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-sky-600/30 bg-sky-600/10 text-lg font-bold text-sky-700">
+            <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-sky-200 bg-sky-50 text-lg font-bold text-sky-700">
               {user.initials}
             </div>
             <div>
@@ -68,7 +68,7 @@ export default function ProfilePage() {
                 <span
                   className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase ${
                     user.role === "admin"
-                      ? "border-navy-600/30 bg-navy-600/10 text-navy-700"
+                      ? "border-sky-200 bg-sky-50 text-sky-700"
                       : "border-sky-600/30 bg-sky-600/10 text-sky-700"
                   }`}
                 >
@@ -82,16 +82,16 @@ export default function ProfilePage() {
 
           {statusMsg && (
             <div
-              className={`mt-4 flex items-center gap-2 rounded-xl border p-3 text-xs ${
+              className={`mt-4 flex items-center gap-2 rounded-lg border p-3 text-xs ${
                 statusMsg.type === "success"
-                  ? "border-emerald-900/60 bg-emerald-950/40 text-emerald-300"
-                  : "border-red-900/60 bg-red-950/40 text-red-300"
+                  ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                  : "border-red-200 bg-red-50 text-red-700"
               }`}
             >
               {statusMsg.type === "success" ? (
-                <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+                <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500" />
               ) : (
-                <AlertCircle className="h-4 w-4 shrink-0 text-red-400" />
+                <AlertCircle className="h-4 w-4 shrink-0 text-red-500" />
               )}
               <span>{statusMsg.text}</span>
             </div>

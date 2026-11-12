@@ -103,7 +103,7 @@ export default function AdminUsersPage() {
         </select>
       </div>
 
-      <div className="overflow-x-auto rounded-2xl border border-slate-200/80 bg-white/60 shadow-lg">
+      <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm">
         <table className="w-full text-left text-xs text-slate-700">
           <thead className="border-b border-slate-200 bg-white/90 text-slate-600">
             <tr>

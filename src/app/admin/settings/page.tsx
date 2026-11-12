@@ -23,15 +23,15 @@ export default function AdminSettingsPage() {
       </div>
 
       {saved && (
-        <div className="flex items-center gap-2 rounded-xl border border-emerald-900/60 bg-emerald-950/40 p-3 text-xs text-emerald-300">
-          <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" />
+        <div className="flex items-center gap-2 rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-xs text-emerald-700">
+          <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500" />
           <span>Pengaturan berhasil disimpan.</span>
         </div>
       )}
 
-      <form onSubmit={handleSave} className="rounded-2xl border border-slate-200/80 bg-white/60 p-6 space-y-4 shadow-lg">
+      <form onSubmit={handleSave} className="rounded-lg border border-slate-200 bg-white p-6 space-y-4 shadow-sm">
         <div className="flex items-center gap-2 mb-2">
-          <Settings className="h-4 w-4 text-navy-700" />
+          <Settings className="h-4 w-4 text-sky-700" />
           <h2 className="text-sm font-semibold text-slate-900">Informasi Kelas & Platform</h2>
         </div>
 
@@ -58,13 +58,13 @@ export default function AdminSettingsPage() {
         <div className="pt-2 border-t border-slate-200">
           <div className="flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
-              <Database className="h-4 w-4 text-emerald-400" />
+              <Database className="h-4 w-4 text-emerald-600" />
               <div>
                 <p className="font-medium text-slate-800">Database Engine</p>
                 <p className="text-[11px] text-slate-600">Supabase + Local Persistent Store</p>
               </div>
             </div>
-            <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-400 border border-emerald-500/20">
+            <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 border border-emerald-200">
               Sinkron & Terhubung
             </span>
           </div>

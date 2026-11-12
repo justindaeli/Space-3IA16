@@ -31,7 +31,7 @@ export default function AdminOverviewPage() {
         <Skeleton className="h-8 w-48" />
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
           {[0, 1, 2, 3].map((i) => (
-            <Skeleton key={i} className="h-28 rounded-2xl" />
+            <Skeleton key={i} className="h-28 rounded-lg" />
           ))}
         </div>
       </div>
@@ -51,7 +51,7 @@ export default function AdminOverviewPage() {
 
       {/* 4 Metrics Cards */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <article className="rounded-2xl border border-slate-200/80 bg-white/60 p-4 shadow-sm">
+        <article className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase text-slate-600">Pengguna</span>
             <Users className="h-4 w-4 text-sky-700" />
@@ -60,16 +60,16 @@ export default function AdminOverviewPage() {
           <p className="mt-1 text-[11px] text-slate-600">{stats.activeUsers} akun aktif · {stats.adminCount} admin</p>
         </article>
 
-        <article className="rounded-2xl border border-slate-200/80 bg-white/60 p-4 shadow-sm">
+        <article className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase text-slate-600">Tugas Kelompok</span>
-            <CheckSquare className="h-4 w-4 text-emerald-400" />
+            <CheckSquare className="h-4 w-4 text-emerald-600" />
           </div>
           <p className="mt-3 text-2xl font-bold text-slate-900">{stats.totalTasks}</p>
           <p className="mt-1 text-[11px] text-slate-600">{stats.completedTasks} tugas selesai</p>
         </article>
 
-        <article className="rounded-2xl border border-slate-200/80 bg-white/60 p-4 shadow-sm">
+        <article className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase text-slate-600">Materi</span>
             <FolderOpen className="h-4 w-4 text-amber-400" />
@@ -78,7 +78,7 @@ export default function AdminOverviewPage() {
           <p className="mt-1 text-[11px] text-slate-600">Modul, slide & catatan</p>
         </article>
 
-        <article className="rounded-2xl border border-slate-200/80 bg-white/60 p-4 shadow-sm">
+        <article className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase text-slate-600">Pengumuman</span>
             <Bell className="h-4 w-4 text-purple-400" />
@@ -91,7 +91,7 @@ export default function AdminOverviewPage() {
       {/* Course Breakdown & Activity */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Distribution */}
-        <section className="rounded-2xl border border-slate-200/80 bg-white/60 p-5">
+        <section className="rounded-lg border border-slate-200 bg-white p-5">
           <h2 className="text-sm font-semibold text-slate-800">Distribusi Tugas per Mata Kuliah</h2>
           <div className="mt-4 space-y-3">
             {Object.entries(stats.tasksByCourse).map(([course, count]) => {
@@ -103,7 +103,7 @@ export default function AdminOverviewPage() {
                     <span className="font-semibold text-slate-600">{count} tugas ({pct}%)</span>
                   </div>
                   <div className="h-2 w-full rounded-full bg-slate-200 overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-sky-600 to-navy-600 rounded-full" style={{ width: `${pct}%` }} />
+                    <div className="h-full bg-sky-600 rounded-full" style={{ width: `${pct}%` }} />
                   </div>
                 </div>
               );
@@ -112,10 +112,10 @@ export default function AdminOverviewPage() {
         </section>
 
         {/* Recent Activity */}
-        <section className="rounded-2xl border border-slate-200/80 bg-white/60 p-5">
+        <section className="rounded-lg border border-slate-200 bg-white p-5">
           <div className="flex items-center justify-between mb-3">
             <h2 className="text-sm font-semibold text-slate-800">Log Aktivitas Terbaru</h2>
-            <Link href="/admin/activities" className="text-[11px] text-navy-700 hover:underline flex items-center gap-1">
+            <Link href="/admin/activities" className="text-[11px] text-sky-700 hover:underline flex items-center gap-1">
               Lihat semua <ArrowRight className="h-3 w-3" />
             </Link>
           </div>

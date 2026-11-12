@@ -50,7 +50,7 @@ export function AnnouncementManager() {
   };
 
   return (
-    <div className="rounded-2xl border border-slate-200/80 bg-white/60 p-5 space-y-4">
+    <div className="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
       <div className="flex items-center gap-2">
         <Megaphone className="h-4 w-4 text-purple-400" />
         <h2 className="text-sm font-semibold text-slate-900">Siaran Pengumuman Kelas</h2>
@@ -79,7 +79,7 @@ export function AnnouncementManager() {
               <p className="text-slate-800">{a.title}</p>
               <button
                 onClick={() => handleDelete(a.id)}
-                className="p-1 text-slate-500 hover:text-red-400"
+                className="p-1 text-slate-500 hover:text-red-500"
                 title="Hapus"
               >
                 <Trash2 className="h-3.5 w-3.5" />

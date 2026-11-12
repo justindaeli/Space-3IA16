@@ -43,7 +43,7 @@ export function MaterialManager() {
   };
 
   return (
-    <div className="rounded-2xl border border-slate-200/80 bg-white/60 p-5 space-y-4">
+    <div className="rounded-lg border border-slate-200 bg-white p-5 space-y-4">
       <div className="flex items-center gap-2">
         <BookOpen className="h-4 w-4 text-amber-400" />
         <h2 className="text-sm font-semibold text-slate-900">Tambah Berkas Materi Kuliah</h2>
@@ -101,7 +101,7 @@ export function MaterialManager() {
                 <p className="font-medium text-slate-800">{m.title}</p>
                 <p className="text-[11px] text-slate-600">{m.course} · {m.type}</p>
               </div>
-              <button onClick={() => handleDelete(m.id)} className="p-1 text-slate-500 hover:text-red-400">
+              <button onClick={() => handleDelete(m.id)}              className="p-1 text-slate-500 hover:text-red-500">
                 <Trash2 className="h-3.5 w-3.5" />
               </button>
             </div>

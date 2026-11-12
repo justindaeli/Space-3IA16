@@ -61,13 +61,13 @@ export function MaterialLocker({ materials }: MaterialLockerProps) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Cari materi kuliah atau topik..."
-            className="w-full rounded-xl border border-slate-200/80 bg-white/60 pl-8 pr-3 py-1.5 text-xs text-slate-800 placeholder-slate-500 focus:outline-none focus:border-slate-300"
+            className="w-full rounded-lg border border-slate-200 bg-white pl-8 pr-3 py-1.5 text-xs text-slate-800 placeholder-slate-500 focus:outline-none focus:border-sky-500"
           />
         </div>
         <select
           value={typeFilter}
           onChange={(e) => setTypeFilter(e.target.value)}
-          className="rounded-xl border border-slate-200/80 bg-white/60 px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none"
+          className="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none"
         >
           <option value="all">Semua Tipe Berkas</option>
           <option value="modul">Modul Praktikum</option>
@@ -95,9 +95,9 @@ export function MaterialLocker({ materials }: MaterialLockerProps) {
           {[...grouped.entries()].map(([course, items]) => (
             <article
               key={course}
-              className="border-t-2 border-slate-900 bg-white px-5 py-4"
+              className="rounded-lg border border-slate-200 bg-white px-5 py-4"
             >
-              <div className="flex items-center justify-between border-b border-slate-200/80 pb-3">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
                 <h3 className="text-sm font-semibold text-slate-900">{course}</h3>
                 <span className="text-xs text-slate-600">{items.length} materi</span>
               </div>
