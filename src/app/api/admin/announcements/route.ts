@@ -3,6 +3,8 @@ import { requireAdminUser } from "@/lib/server/session";
 import { createAnnouncement, deleteAnnouncement, logActivity } from "@/lib/server/db-supabase-content";
 import type { CreateAnnouncementInput } from "@/types";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   try {
     const admin = await requireAdminUser();

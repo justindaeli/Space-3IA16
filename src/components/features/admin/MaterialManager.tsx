@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { inputClass, primaryButtonClass } from "@/lib/ui-classes";
 import { FolderPlus, BookOpen, Trash2 } from "lucide-react";
 import type { Material, MaterialType } from "@/types";
@@ -12,6 +12,20 @@ export function MaterialManager() {
   const [type, setType] = useState<MaterialType>("modul");
   const [url, setUrl] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    void fetch("/api/materials", { cache: "no-store" })
+      .then(async (res) => {
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!cancelled && Array.isArray(json.materials)) setMaterials(json.materials);
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const handleAdd = async (e: FormEvent) => {
     e.preventDefault();

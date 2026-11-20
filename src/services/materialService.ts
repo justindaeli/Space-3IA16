@@ -1,21 +1,11 @@
-import { mockMaterials } from "@/lib/mock-data";
 import type { Material, CreateMaterialInput } from "@/types";
 
 export async function getMaterials(): Promise<Material[]> {
-  if (typeof window !== "undefined") {
-    try {
-      const res = await fetch("/api/materials");
-      if (res.ok) {
-        const json = await res.json();
-        if (Array.isArray(json.materials) && json.materials.length > 0) {
-          return json.materials;
-        }
-      }
-    } catch {
-      // fallback to mock
-    }
-  }
-  return Promise.resolve(mockMaterials);
+  const res = await fetch("/api/materials", { cache: "no-store" });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error || "Gagal memuat materi.");
+  if (Array.isArray(json.materials)) return json.materials;
+  throw new Error("Format data materi tidak valid.");
 }
 
 export async function createMaterial(input: CreateMaterialInput): Promise<Material> {

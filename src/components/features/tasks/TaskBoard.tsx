@@ -12,6 +12,7 @@ interface TaskBoardProps {
   tasks: Task[];
   pendingTaskId: string | null;
   actionError: string | null;
+  canEdit: boolean;
   onAddTask: () => void;
   onMoveTask: (id: string, status: TaskStatus) => void;
 }
@@ -20,6 +21,7 @@ export function TaskBoard({
   tasks,
   pendingTaskId,
   actionError,
+  canEdit,
   onAddTask,
   onMoveTask,
 }: TaskBoardProps) {
@@ -49,14 +51,18 @@ export function TaskBoard({
             Papan Tugas
           </h2>
           <p className="text-xs text-slate-600">
-            Pantau progres dan kelola pembagian tugas kelompok
+            {canEdit
+              ? "Pantau progres dan kelola pembagian tugas kelompok"
+              : "Pantau progres tugas kelompok dan deadline terdekat"}
           </p>
         </div>
 
-        <button type="button" onClick={onAddTask} className={primaryButtonClass}>
-          <Plus className="h-4 w-4" />
-          <span>Tambah Tugas Utama</span>
-        </button>
+        {canEdit && (
+          <button type="button" onClick={onAddTask} className={primaryButtonClass}>
+            <Plus className="h-4 w-4" />
+            <span>Tambah Tugas Utama</span>
+          </button>
+        )}
       </div>
 
       {/* Filter and Search Bar */}
@@ -107,7 +113,7 @@ export function TaskBoard({
           }
           icon={<ListTodo className="h-6 w-6 text-sky-700" />}
           action={
-            tasks.length === 0 ? (
+            tasks.length === 0 && canEdit ? (
               <button type="button" onClick={onAddTask} className={primaryButtonClass}>
                 <Plus className="h-4 w-4" />
                 <span>+ Tambah Tugas Utama</span>
@@ -131,6 +137,7 @@ export function TaskBoard({
               title={TASK_STATUS_LABELS[status]}
               tasks={filteredTasks.filter((task) => task.status === status)}
               pendingTaskId={pendingTaskId}
+              canEdit={canEdit}
               onMoveTask={onMoveTask}
             />
           ))}

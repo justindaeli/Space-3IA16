@@ -1,9 +1,11 @@
 import crypto from "node:crypto";
 
-const DEFAULT_SECRET = "space3ia16_super_secure_jwt_secret_key_2026";
-
 export function getJwtSecret(): string {
-  return process.env.SESSION_SECRET || DEFAULT_SECRET;
+  const secret = process.env.SESSION_SECRET;
+  if (!secret || secret.length < 32) {
+    throw new Error("SESSION_SECRET must be configured with at least 32 characters.");
+  }
+  return secret;
 }
 
 export function hashPassword(password: string): { hash: string; salt: string } {
@@ -76,7 +78,7 @@ export async function verifyJwt<T extends Record<string, unknown>>(
 
     const parsed = JSON.parse(base64UrlDecode(body)) as T;
     const exp = typeof parsed.exp === "number" ? parsed.exp : 0;
-    if (exp > 0 && Date.now() >= exp * 1000) {
+    if (exp <= 0 || Date.now() >= exp * 1000) {
       return null;
     }
     return parsed;

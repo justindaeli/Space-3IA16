@@ -10,9 +10,11 @@ import { DashboardSkeleton } from "@/components/ui/Skeleton";
 import { ErrorState } from "@/components/ui/ErrorState";
 import { useDashboardData } from "@/hooks/useDashboardData";
 import { computeQuickStats } from "@/lib/quick-stats";
+import { useAuth } from "@/context/AuthContext";
 
 export default function HomePage() {
   const dashboard = useDashboardData();
+  const { isAdmin } = useAuth();
   const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   if (dashboard.loadStatus === "loading") {
@@ -39,15 +41,18 @@ export default function HomePage() {
         tasks={dashboard.tasks}
         pendingTaskId={dashboard.pendingTaskId}
         actionError={dashboard.actionError}
+        canEdit={isAdmin}
         onAddTask={() => setIsCreateOpen(true)}
         onMoveTask={dashboard.moveTask}
       />
       <MaterialLocker materials={dashboard.materials} />
-      <CreateTaskModal
-        isOpen={isCreateOpen}
-        onClose={() => setIsCreateOpen(false)}
-        onTaskCreated={dashboard.addTask}
-      />
+      {isAdmin && (
+        <CreateTaskModal
+          isOpen={isCreateOpen}
+          onClose={() => setIsCreateOpen(false)}
+          onTaskCreated={dashboard.addTask}
+        />
+      )}
     </div>
   );
 }

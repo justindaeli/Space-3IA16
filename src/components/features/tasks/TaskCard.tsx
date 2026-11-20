@@ -7,10 +7,11 @@ import { Clock, CheckCircle } from "lucide-react";
 interface TaskCardProps {
   task: Task;
   isPending: boolean;
+  canEdit: boolean;
   onStatusChange: (status: TaskStatus) => void;
 }
 
-export function TaskCard({ task, isPending, onStatusChange }: TaskCardProps) {
+export function TaskCard({ task, isPending, canEdit, onStatusChange }: TaskCardProps) {
   const isOverdue = task.status !== "done" && isDeadlineOverdue(task.deadline);
   const courseStyle = getCourseStyle(task.course);
 
@@ -65,19 +66,25 @@ export function TaskCard({ task, isPending, onStatusChange }: TaskCardProps) {
           {formatDeadline(task.deadline)}
         </span>
 
-        <select
-          aria-label={`Ubah status ${task.title}`}
-          value={task.status}
-          disabled={isPending}
-          onChange={(e) => handleSelectStatus(e.target.value)}
-          className="cursor-pointer rounded-lg border border-slate-300/80 bg-slate-200/90 px-2 py-1 text-[11px] font-medium text-slate-800 transition-colors hover:border-slate-400 focus:border-sky-600 focus:outline-none disabled:cursor-wait disabled:opacity-50"
-        >
-          {TASK_STATUSES.map((status) => (
-            <option key={status} value={status}>
-              {TASK_STATUS_LABELS[status]}
-            </option>
-          ))}
-        </select>
+        {canEdit ? (
+          <select
+            aria-label={`Ubah status ${task.title}`}
+            value={task.status}
+            disabled={isPending}
+            onChange={(e) => handleSelectStatus(e.target.value)}
+            className="cursor-pointer rounded-lg border border-slate-300/80 bg-slate-200/90 px-2 py-1 text-[11px] font-medium text-slate-800 transition-colors hover:border-slate-400 focus:border-sky-600 focus:outline-none disabled:cursor-wait disabled:opacity-50"
+          >
+            {TASK_STATUSES.map((status) => (
+              <option key={status} value={status}>
+                {TASK_STATUS_LABELS[status]}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <span className="rounded-lg border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] font-medium text-slate-600">
+            {TASK_STATUS_LABELS[task.status]}
+          </span>
+        )}
       </div>
     </article>
   );

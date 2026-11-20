@@ -1,21 +1,11 @@
-import { mockAnnouncements } from "@/lib/mock-data";
 import type { Announcement, CreateAnnouncementInput } from "@/types";
 
 export async function getAnnouncements(): Promise<Announcement[]> {
-  if (typeof window !== "undefined") {
-    try {
-      const res = await fetch("/api/announcements");
-      if (res.ok) {
-        const json = await res.json();
-        if (Array.isArray(json.announcements) && json.announcements.length > 0) {
-          return json.announcements;
-        }
-      }
-    } catch {
-      // fallback to mock
-    }
-  }
-  return Promise.resolve(mockAnnouncements);
+  const res = await fetch("/api/announcements", { cache: "no-store" });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error || "Gagal memuat pengumuman.");
+  if (Array.isArray(json.announcements)) return json.announcements;
+  throw new Error("Format data pengumuman tidak valid.");
 }
 
 export async function createAnnouncement(input: CreateAnnouncementInput): Promise<Announcement> {

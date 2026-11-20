@@ -24,9 +24,9 @@ export function UserModal({ isOpen, onClose, onSave, editUser }: UserModalProps)
   const [error, setError] = useState<string | null>(null);
 
   // Reset form fields when modal target changes.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (editUser) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setName(editUser.name);
       setEmail(editUser.email);
       setUsername(editUser.username);
@@ -34,19 +34,16 @@ export function UserModal({ isOpen, onClose, onSave, editUser }: UserModalProps)
       setStatus(editUser.status);
       setPassword("");
     } else {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setName("");
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setEmail("");
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setUsername("");
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPassword("");
       setRole("user");
       setStatus("active");
     }
     setError(null);
   }, [editUser, isOpen]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   if (!isOpen) return null;
 

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { clearSessionCookie, getSessionUser } from "@/lib/server/session";
 import { logActivity } from "@/lib/server/db-supabase-content";
 
+export const dynamic = "force-dynamic";
+
 export async function POST() {
   try {
     const user = await getSessionUser();
