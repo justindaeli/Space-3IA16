@@ -6,6 +6,8 @@ import { updateUserPassword, logActivity } from "@/lib/server/db-supabase-conten
 import { hashPassword } from "@/lib/server/crypto";
 import type { ChangePasswordInput } from "@/types";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   try {
     const user = await requireSessionUser();
@@ -46,7 +48,10 @@ export async function POST(request: Request) {
     }
 
     const { hash, salt } = hashPassword(newPassword);
-    await updateUserPassword(user.id, hash, salt);
+    const updated = await updateUserPassword(user.id, hash, salt);
+    if (!updated) {
+      return NextResponse.json({ error: "Gagal menyimpan password baru." }, { status: 500 });
+    }
     await logActivity(user.id, user.name, "CHANGE_PASSWORD", "Security", "Mengubah password akun");
 
     return NextResponse.json({ success: true, message: "Password berhasil diperbarui." });

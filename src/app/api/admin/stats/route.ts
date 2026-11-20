@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { requireAdminUser } from "@/lib/server/session";
 import { getAdminStats } from "@/lib/server/db-supabase-content";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     await requireAdminUser();

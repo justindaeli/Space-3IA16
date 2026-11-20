@@ -1,32 +1,19 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { verifyJwt } from "@/lib/server/crypto";
+import type { UserRole } from "@/types";
 
-interface TokenPayload {
+interface TokenPayload extends Record<string, unknown> {
   sub: string;
-  role: string;
+  role: UserRole;
   name: string;
   exp: number;
 }
 
-function parseJwtPayload(token: string): TokenPayload | null {
-  try {
-    const parts = token.split(".");
-    if (parts.length !== 3) return null;
-    const json = Buffer.from(parts[1], "base64url").toString("utf8");
-    const payload = JSON.parse(json) as TokenPayload;
-    if (payload.exp && Date.now() >= payload.exp * 1000) {
-      return null;
-    }
-    return payload;
-  } catch {
-    return null;
-  }
-}
-
-export function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const sessionCookie = request.cookies.get("space3ia16_session")?.value;
-  const session = sessionCookie ? parseJwtPayload(sessionCookie) : null;
+  const session = sessionCookie ? await verifyJwt<TokenPayload>(sessionCookie) : null;
 
   // Protect /admin routes
   if (pathname.startsWith("/admin")) {

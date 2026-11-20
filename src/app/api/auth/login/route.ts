@@ -5,11 +5,13 @@ import { createSessionToken, setSessionCookie } from "@/lib/server/session";
 import { logActivity } from "@/lib/server/db-supabase-content";
 import type { LoginCredentials } from "@/types";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as Partial<LoginCredentials>;
     const identifier = body.identifier?.trim();
-    const password = body.password?.trim();
+    const password = body.password;
     const rememberMe = Boolean(body.rememberMe);
 
     if (!identifier || !password) {

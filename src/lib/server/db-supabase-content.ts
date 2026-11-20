@@ -1,5 +1,14 @@
 import { getSupabaseServer } from "./supabase";
-import type { Task, Material, Announcement, ActivityLog, CreateTaskInput, CreateMaterialInput, CreateAnnouncementInput } from "@/types";
+import type {
+  Task,
+  Material,
+  Announcement,
+  ActivityLog,
+  CreateTaskInput,
+  CreateMaterialInput,
+  CreateAnnouncementInput,
+  TaskStatus,
+} from "@/types";
 
 export async function getAllTasks(): Promise<Task[]> {
   const supabase = getSupabaseServer();
@@ -284,14 +293,15 @@ export async function getAdminStats(): Promise<{
 
 export async function updateTaskStatus(
   id: string,
-  status: string
-): Promise<boolean> {
+  status: TaskStatus
+): Promise<Task | null> {
   const supabase = getSupabaseServer();
   const { error } = await supabase
     .from("tasks")
     .update({ status })
     .eq("id", id);
-  return !error;
+  if (error) return null;
+  return getTaskById(id);
 }
 
 export async function updateUserPassword(

@@ -1,28 +1,34 @@
 import { NextResponse } from "next/server";
 import { updateTaskStatus } from "@/lib/server/db-supabase-content";
+import { requireSessionUser } from "@/lib/server/session";
 import type { TaskStatus } from "@/types";
+import { TASK_STATUSES } from "@/lib/task-status";
+
+export const dynamic = "force-dynamic";
 
 export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    await requireSessionUser();
     const { id } = await params;
     const body = (await request.json()) as { status: TaskStatus };
 
-    if (!body.status) {
+    if (!TASK_STATUSES.includes(body.status)) {
       return NextResponse.json({ error: "Status tugas diperlukan." }, { status: 400 });
     }
 
-    const success = await updateTaskStatus(id, body.status);
-    if (!success) {
+    const task = await updateTaskStatus(id, body.status);
+    if (!task) {
       return NextResponse.json({ error: "Tugas tidak ditemukan" }, { status: 404 });
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, task });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Gagal memperbarui status tugas";
-    return NextResponse.json({ error: message }, { status: 500 });
+    const status = message === "UNAUTHORIZED" ? 401 : 500;
+    return NextResponse.json({ error: message }, { status });
   }
 }
 

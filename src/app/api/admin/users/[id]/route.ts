@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { requireAdminUser } from "@/lib/server/session";
-import { findUserById, updateUserRole, updateUserStatus } from "@/lib/server/db-supabase-users";
+import { findUserById, updateUser } from "@/lib/server/db-supabase-users";
 import { deleteUser, logActivity } from "@/lib/server/db-supabase-content";
 import type { UpdateUserInput } from "@/types";
+
+export const dynamic = "force-dynamic";
 
 export async function PATCH(
   request: Request,
@@ -18,14 +20,17 @@ export async function PATCH(
       return NextResponse.json({ error: "Pengguna tidak ditemukan." }, { status: 404 });
     }
 
-    if (body.role && (body.role === "admin" || body.role === "user")) {
-      await updateUserRole(id, body.role);
+    if (body.role && body.role !== "admin" && body.role !== "user") {
+      return NextResponse.json({ error: "Role tidak valid." }, { status: 400 });
     }
-    if (body.status && (body.status === "active" || body.status === "inactive")) {
-      await updateUserStatus(id, body.status);
+    if (body.status && body.status !== "active" && body.status !== "inactive") {
+      return NextResponse.json({ error: "Status tidak valid." }, { status: 400 });
+    }
+    if (body.newPassword && body.newPassword.length < 6) {
+      return NextResponse.json({ error: "Password minimal harus 6 karakter." }, { status: 400 });
     }
 
-    const updated = await findUserById(id);
+    const updated = await updateUser(id, body);
     if (!updated) {
       return NextResponse.json({ error: "Gagal memperbarui pengguna" }, { status: 500 });
     }

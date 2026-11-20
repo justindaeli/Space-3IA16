@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { inputClass, primaryButtonClass } from "@/lib/ui-classes";
 import { Plus, Trash2, Megaphone } from "lucide-react";
 import type { Announcement } from "@/types";
@@ -10,15 +10,18 @@ export function AnnouncementManager() {
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const fetchAnnouncements = useCallback(async () => {
-    try {
-      const res = await fetch("/api/admin/stats");
-      if (res.ok) {
-        // we can fetch announcements from admin API or mock
-      }
-    } catch {
-      // fallback
-    }
+  useEffect(() => {
+    let cancelled = false;
+    void fetch("/api/announcements", { cache: "no-store" })
+      .then(async (res) => {
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!cancelled && Array.isArray(json.announcements)) setAnnouncements(json.announcements);
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const handleAdd = async (e: FormEvent) => {
