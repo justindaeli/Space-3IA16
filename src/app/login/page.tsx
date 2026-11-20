@@ -43,12 +43,12 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative flex min-h-[75vh] items-center justify-center py-8">
+    <div className="relative flex min-h-[calc(100dvh-9rem)] items-center justify-center px-3 py-5 sm:min-h-[75vh] sm:px-0 sm:py-8">
       {/* Subtle background accent */}
       <div className="pointer-events-none absolute -top-10 h-72 w-72 rounded-full bg-sky-100/60 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-10 h-72 w-72 rounded-full bg-slate-100/60 blur-3xl" />
 
-      <div className="relative w-full max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-lg sm:p-8">
+      <div className="relative w-full max-w-md rounded-xl border border-slate-200 bg-white p-5 shadow-lg sm:rounded-lg sm:p-8">
         <Link
           href="/"
           className="mb-4 inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 transition-colors hover:text-slate-800"
@@ -91,7 +91,7 @@ export default function LoginPage() {
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
                 placeholder="nama@space3ia16.id atau username"
-                className={`${inputClass} pl-9`}
+                className={`${inputClass} pl-9 text-base sm:text-sm`}
               />
             </div>
           </div>
@@ -106,7 +106,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Masukkan password Anda"
-                className={`${inputClass} pr-10 pl-9`}
+                className={`${inputClass} pr-10 pl-9 text-base sm:text-sm`}
               />
               <button
                 type="button"
@@ -133,7 +133,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`${primaryButtonClass} w-full py-2.5 text-sm font-semibold`}
+            className={`${primaryButtonClass} min-h-11 w-full py-2.5 text-sm font-semibold`}
           >
             {isSubmitting ? "Memverifikasi..." : "Masuk ke Akun"}
           </button>

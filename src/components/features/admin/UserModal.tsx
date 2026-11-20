@@ -76,7 +76,7 @@ export function UserModal({ isOpen, onClose, onSave, editUser }: UserModalProps)
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-sm">
-      <div className="relative w-full max-w-md rounded-lg border border-slate-200 bg-white p-6 shadow-xl">
+      <div className="relative max-h-[calc(100dvh-2rem)] w-full max-w-md overflow-y-auto rounded-lg border border-slate-200 bg-white p-5 shadow-xl sm:p-6">
         <button onClick={onClose} className="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition-colors">
           <X className="h-5 w-5" />
         </button>
@@ -106,7 +106,7 @@ export function UserModal({ isOpen, onClose, onSave, editUser }: UserModalProps)
             </label>
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className={inputClass} placeholder="••••••••" />
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
               <label className="mb-1 block text-xs font-medium text-slate-700">Hak Akses (Role)</label>
               <select value={role} onChange={(e) => setRole(e.target.value as UserRole)} className={inputClass}>

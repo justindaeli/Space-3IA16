@@ -57,7 +57,7 @@ export default function ProfilePage() {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* Info Card */}
-        <article className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+        <article className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-sky-200 bg-sky-50 text-lg font-bold text-sky-700">
               {user.initials}

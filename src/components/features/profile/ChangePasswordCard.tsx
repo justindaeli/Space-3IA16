@@ -54,7 +54,7 @@ export function ChangePasswordCard() {
   };
 
   return (
-    <article className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm">
+    <article className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
       <div className="flex items-center gap-2 mb-4">
         <Lock className="h-5 w-5 text-sky-700" />
         <h3 className="text-base font-semibold text-slate-900">Ubah Password Akun</h3>

@@ -45,7 +45,7 @@ export function TaskBoard({
 
   return (
     <section id="tugas" className="scroll-mt-24 space-y-4">
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex items-start justify-between gap-3 sm:flex-wrap sm:items-center sm:gap-4">
         <div>
           <h2 className="text-lg font-bold tracking-tight text-slate-900 sm:text-xl">
             Papan Tugas
@@ -58,16 +58,17 @@ export function TaskBoard({
         </div>
 
         {canEdit && (
-          <button type="button" onClick={onAddTask} className={primaryButtonClass}>
+          <button type="button" onClick={onAddTask} className={`${primaryButtonClass} shrink-0 px-3 sm:px-4`}>
             <Plus className="h-4 w-4" />
-            <span>Tambah Tugas Utama</span>
+            <span className="hidden sm:inline">Tambah Tugas Utama</span>
+            <span className="sm:hidden">Tambah</span>
           </button>
         )}
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-wrap items-center gap-2.5">
-        <div className="relative flex-1 min-w-[180px]">
+      <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:items-center">
+        <div className="relative w-full sm:min-w-[180px] sm:flex-1">
           <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-slate-500" />
           <input
             type="text"
@@ -78,12 +79,12 @@ export function TaskBoard({
           />
         </div>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex w-full items-center gap-1.5 sm:w-auto">
           <Filter className="h-3.5 w-3.5 text-slate-500" />
           <select
             value={courseFilter}
             onChange={(e) => setCourseFilter(e.target.value)}
-            className="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-xs text-slate-700 focus:outline-none"
+            className="w-full rounded-lg border border-slate-200 bg-white px-2.5 py-2 text-xs text-slate-700 focus:outline-none sm:w-auto sm:py-1.5"
           >
             <option value="all">Semua Mata Kuliah</option>
             {courses.map((c) => (

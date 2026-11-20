@@ -24,8 +24,8 @@ export function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-full shrink-0 border-b border-slate-200 bg-white p-4 md:w-60 md:min-h-[calc(100vh-5rem)] md:border-r md:border-b-0 md:p-5">
-      <div className="mb-6 flex items-center gap-2 px-2">
+    <aside className="w-full shrink-0 border-b border-slate-200 bg-white p-3 sm:p-4 md:w-60 md:min-h-[calc(100vh-5rem)] md:border-r md:border-b-0 md:p-5">
+      <div className="mb-3 flex items-center gap-2 px-1 sm:mb-6 sm:px-2">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-sky-200 bg-sky-50 text-sky-700">
           <Shield className="h-4 w-4" />
         </div>
@@ -35,7 +35,7 @@ export function AdminSidebar() {
         </div>
       </div>
 
-      <nav className="flex flex-row gap-1 overflow-x-auto pb-2 md:flex-col md:pb-0">
+      <nav className="scrollbar-none flex flex-row gap-1 overflow-x-auto pb-1 sm:pb-2 md:flex-col md:pb-0">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive =

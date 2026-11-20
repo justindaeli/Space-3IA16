@@ -59,7 +59,7 @@ export function AnnouncementManager() {
         <h2 className="text-sm font-semibold text-slate-900">Siaran Pengumuman Kelas</h2>
       </div>
 
-      <form onSubmit={handleAdd} className="flex gap-2">
+      <form onSubmit={handleAdd} className="flex flex-col gap-2 sm:flex-row">
         <input
           type="text"
           value={title}
@@ -67,7 +67,7 @@ export function AnnouncementManager() {
           placeholder="Tulis pengumuman baru untuk kelas..."
           className={`${inputClass} text-xs`}
         />
-        <button type="submit" disabled={loading} className={`${primaryButtonClass} shrink-0 text-xs py-2`}>
+        <button type="submit" disabled={loading} className={`${primaryButtonClass} min-h-10 shrink-0 text-xs sm:min-h-0 py-2`}>
           <Plus className="h-3.5 w-3.5" />
           <span>Terbitkan</span>
         </button>

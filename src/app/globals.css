@@ -28,6 +28,22 @@ body {
   overflow-x: hidden;
 }
 
+@media (max-width: 639px) {
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 ::selection { background: #cfe5f5; color: #10263b; }
 
 @keyframes skeleton-shimmer { 0%, 100% { opacity: .45; } 50% { opacity: .85; } }

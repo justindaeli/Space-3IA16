@@ -13,7 +13,7 @@ interface TaskColumnProps {
 
 export function TaskColumn({ title, tasks, pendingTaskId, canEdit, onMoveTask }: TaskColumnProps) {
   return (
-    <section className="flex min-h-64 flex-col rounded-lg border border-slate-200 bg-white px-3 py-4">
+    <section className="flex min-h-40 flex-col rounded-lg border border-slate-200 bg-white px-3 py-4 sm:min-h-64">
       <header className="mb-3.5 flex items-center justify-between px-1">
         <div className="flex items-center gap-2">
           <h3 className="text-sm font-semibold tracking-tight text-slate-900">{title}</h3>

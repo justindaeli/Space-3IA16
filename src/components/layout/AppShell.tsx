@@ -20,7 +20,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
-        <div className="flex w-full items-center justify-between gap-4 px-4 py-3 sm:px-8 lg:px-10">
+        <div className="flex w-full items-center justify-between gap-2 px-3 py-2.5 sm:gap-4 sm:px-8 sm:py-3 lg:px-10">
           <Link
             href="/"
             aria-label="Space 3IA16 beranda"
@@ -29,7 +29,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <div className="flex h-7 w-7 items-center justify-center rounded-md border border-slate-200 bg-white text-sky-800">
               <Layers className="h-4 w-4" />
             </div>
-            <span className="font-bold text-slate-950">Space 3IA16</span>
+            <span className="hidden font-bold text-slate-950 xs:inline sm:inline">Space 3IA16</span>
           </Link>
 
           {!isAdminSection && (
@@ -68,7 +68,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-sky-600/20 text-[10px] font-bold text-sky-700">
                     {user.initials}
                   </span>
-                  <span className="max-w-[100px] truncate sm:max-w-[140px]">{user.name}</span>
+                  <span className="hidden max-w-[100px] truncate sm:block sm:max-w-[140px]">{user.name}</span>
                 </Link>
 
                 <button
@@ -106,7 +106,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         )}
       </header>
 
-      <main className="flex w-full flex-1 flex-col gap-8 px-4 py-6 sm:px-8 sm:py-8 lg:px-10">
+      <main className="flex w-full flex-1 flex-col gap-6 px-3 py-5 sm:gap-8 sm:px-8 sm:py-8 lg:px-10">
         {children}
       </main>
     </>

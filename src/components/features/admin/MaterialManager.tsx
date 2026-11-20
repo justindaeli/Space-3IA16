@@ -90,7 +90,7 @@ export function MaterialManager() {
           </select>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row">
           <input
             type="url"
             value={url}
@@ -98,7 +98,7 @@ export function MaterialManager() {
             placeholder="Link Unduhan Dokumen (https://...)"
             className={`${inputClass} text-xs`}
           />
-          <button type="submit" disabled={loading} className={`${primaryButtonClass} shrink-0 text-xs py-2`}>
+          <button type="submit" disabled={loading} className={`${primaryButtonClass} min-h-10 shrink-0 text-xs sm:min-h-0 py-2`}>
             <FolderPlus className="h-3.5 w-3.5" />
             <span>Simpan Materi</span>
           </button>
