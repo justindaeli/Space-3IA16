@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { inputClass, primaryButtonClass } from "@/lib/ui-classes";
-import { Eye, EyeOff, Lock, User, AlertCircle, ArrowLeft, Shield, Sparkles } from "lucide-react";
+import { Eye, EyeOff, Lock, User, AlertCircle, ArrowLeft, Sparkles } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -40,12 +40,6 @@ export default function LoginPage() {
     } else {
       setError(result.error || "Gagal masuk. Periksa kembali kredensial Anda.");
     }
-  };
-
-  const fillDemo = (id: string, pass: string) => {
-    setIdentifier(id);
-    setPassword(pass);
-    setError(null);
   };
 
   return (
@@ -145,28 +139,6 @@ export default function LoginPage() {
           </button>
         </form>
 
-        {/* Demo Accounts Quick-fill */}
-        <div className="mt-6 border-t border-slate-200 pt-4">
-          <p className="mb-2 text-[11px] font-medium text-slate-600">Pilih Akun Uji Coba Cepat:</p>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={() => fillDemo("admin@space3ia16.id", "admin123")}
-              className="flex items-center justify-center gap-1.5 rounded-lg border border-sky-200 bg-sky-50 px-2 py-1.5 text-xs font-medium text-sky-800 transition-colors hover:bg-sky-100"
-            >
-              <Shield className="h-3 w-3" />
-              <span>Akun Admin</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => fillDemo("user@space3ia16.id", "user123")}
-              className="flex items-center justify-center gap-1.5 rounded-lg border border-sky-600/30 bg-sky-600/10 px-2 py-1.5 text-xs font-medium text-sky-800 transition-all hover:bg-sky-600/20"
-            >
-              <User className="h-3 w-3" />
-              <span>Akun Mahasiswa</span>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );
