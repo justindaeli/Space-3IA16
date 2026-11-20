@@ -22,11 +22,6 @@ export async function proxy(request: NextRequest) {
       url.searchParams.set("from", pathname);
       return NextResponse.redirect(url);
     }
-    if (session.role !== "admin") {
-      const url = new URL("/", request.url);
-      url.searchParams.set("error", "unauthorized_admin");
-      return NextResponse.redirect(url);
-    }
   }
 
   // Protect /profile routes
@@ -36,14 +31,6 @@ export async function proxy(request: NextRequest) {
       url.searchParams.set("from", pathname);
       return NextResponse.redirect(url);
     }
-  }
-
-  // If already logged in, redirect /login to destination
-  if (pathname === "/login" && session) {
-    if (session.role === "admin") {
-      return NextResponse.redirect(new URL("/admin", request.url));
-    }
-    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
