@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { updateTaskStatus } from "@/lib/server/db-supabase-content";
-import { requireSessionUser } from "@/lib/server/session";
+import { requireAdminUser } from "@/lib/server/session";
 import type { TaskStatus } from "@/types";
 import { TASK_STATUSES } from "@/lib/task-status";
 
@@ -11,7 +11,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    await requireSessionUser();
+    await requireAdminUser();
     const { id } = await params;
     const body = (await request.json()) as { status: TaskStatus };
 
@@ -27,7 +27,8 @@ export async function PATCH(
     return NextResponse.json({ success: true, task });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Gagal memperbarui status tugas";
-    const status = message === "UNAUTHORIZED" ? 401 : 500;
+    const status =
+      message === "UNAUTHORIZED" ? 401 : message === "FORBIDDEN" ? 403 : 500;
     return NextResponse.json({ error: message }, { status });
   }
 }

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAllTasks, createTask, logActivity } from "@/lib/server/db-supabase-content";
-import { requireSessionUser } from "@/lib/server/session";
+import { requireAdminUser } from "@/lib/server/session";
 import type { CreateTaskInput } from "@/types";
 
 export const dynamic = "force-dynamic";
@@ -12,7 +12,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const user = await requireSessionUser();
+    const user = await requireAdminUser();
     const body = (await request.json()) as CreateTaskInput;
 
     if (!body.title?.trim() || !body.course?.trim() || !body.deadline) {
@@ -51,7 +51,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, task: created }, { status: 201 });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : "Gagal membuat tugas";
-    const status = message === "UNAUTHORIZED" ? 401 : 500;
+    const status =
+      message === "UNAUTHORIZED" ? 401 : message === "FORBIDDEN" ? 403 : 500;
     return NextResponse.json({ error: message }, { status });
   }
 }

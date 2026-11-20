@@ -7,10 +7,11 @@ interface TaskColumnProps {
   title: string;
   tasks: Task[];
   pendingTaskId: string | null;
+  canEdit: boolean;
   onMoveTask: (id: string, status: TaskStatus) => void;
 }
 
-export function TaskColumn({ title, tasks, pendingTaskId, onMoveTask }: TaskColumnProps) {
+export function TaskColumn({ title, tasks, pendingTaskId, canEdit, onMoveTask }: TaskColumnProps) {
   return (
     <section className="flex min-h-64 flex-col rounded-lg border border-slate-200 bg-white px-3 py-4">
       <header className="mb-3.5 flex items-center justify-between px-1">
@@ -35,6 +36,7 @@ export function TaskColumn({ title, tasks, pendingTaskId, onMoveTask }: TaskColu
               key={task.id}
               task={task}
               isPending={pendingTaskId === task.id}
+              canEdit={canEdit}
               onStatusChange={(status) => onMoveTask(task.id, status)}
             />
           ))}
