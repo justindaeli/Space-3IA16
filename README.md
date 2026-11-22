@@ -5,7 +5,9 @@ Portal kolaborasi kelas berbasis Next.js dan Supabase. Pengguna dapat melihat tu
 ## Menjalankan secara lokal
 
 1. Salin `.env.example` menjadi `.env.local`.
-2. Isi `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, dan `SESSION_SECRET`.
+2. Isi `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (atau
+   `NEXT_PUBLIC_SUPABASE_ANON_KEY` untuk proyek lama), `SUPABASE_SERVICE_ROLE_KEY`,
+   dan `SESSION_SECRET`.
 3. Install dependency dan jalankan aplikasi:
 
    ```bash
@@ -24,6 +26,7 @@ Hubungkan repository GitHub ini ke Netlify dan gunakan konfigurasi berikut:
 Tambahkan environment variables berikut di **Site configuration → Environment variables**:
 
 - `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` — publishable key untuk klien browser
 - `SUPABASE_SERVICE_ROLE_KEY` — server-only, jangan gunakan awalan `NEXT_PUBLIC_`
 - `SESSION_SECRET` — secret acak minimal 32 karakter
 

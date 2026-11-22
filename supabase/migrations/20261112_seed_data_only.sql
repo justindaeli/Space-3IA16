@@ -1,6 +1,105 @@
 -- Generated from data/db.json. Schema already created by 20261106.
 -- This imports seed data only.
 
+-- Reconcile schemas created by older prototypes before importing the seed.
+ALTER TABLE public.users
+  ADD COLUMN IF NOT EXISTS password_hash text,
+  ADD COLUMN IF NOT EXISTS password_salt text,
+  ADD COLUMN IF NOT EXISTS avatar_url text,
+  ADD COLUMN IF NOT EXISTS last_login_at timestamptz,
+  ADD COLUMN IF NOT EXISTS created_at timestamptz;
+
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema = 'public' AND table_name = 'users'
+      AND column_name = 'passwordHash'
+  ) THEN
+    EXECUTE 'UPDATE public.users SET password_hash = "passwordHash", password_salt = "passwordSalt"';
+  END IF;
+
+  IF EXISTS (
+    SELECT 1 FROM information_schema.columns
+    WHERE table_schema = 'public' AND table_name = 'users'
+      AND column_name = 'createdAt'
+  ) THEN
+    EXECUTE 'UPDATE public.users SET created_at = "createdAt" WHERE created_at IS NULL';
+  END IF;
+END $$;
+
+UPDATE public.users
+SET created_at = COALESCE(created_at, now())
+WHERE created_at IS NULL;
+
+ALTER TABLE public.users
+  ALTER COLUMN created_at SET NOT NULL,
+  ALTER COLUMN created_at SET DEFAULT now();
+
+ALTER TABLE public.users DROP COLUMN IF EXISTS "passwordHash";
+ALTER TABLE public.users DROP COLUMN IF EXISTS "passwordSalt";
+ALTER TABLE public.users DROP COLUMN IF EXISTS "createdAt";
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conname = 'users_role_check'
+      AND conrelid = 'public.users'::regclass
+  ) THEN
+    ALTER TABLE public.users
+      ADD CONSTRAINT users_role_check CHECK (role IN ('admin', 'user'));
+  END IF;
+
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conname = 'users_status_check'
+      AND conrelid = 'public.users'::regclass
+  ) THEN
+    ALTER TABLE public.users
+      ADD CONSTRAINT users_status_check CHECK (status IN ('active', 'inactive'));
+  END IF;
+END $$;
+
+ALTER TABLE public.tasks
+  ADD COLUMN IF NOT EXISTS created_at timestamptz;
+
+UPDATE public.tasks
+SET created_at = COALESCE(created_at, now())
+WHERE created_at IS NULL;
+
+ALTER TABLE public.tasks
+  ALTER COLUMN created_at SET NOT NULL,
+  ALTER COLUMN created_at SET DEFAULT now();
+
+ALTER TABLE public.materials
+  ADD COLUMN IF NOT EXISTS type text,
+  ADD COLUMN IF NOT EXISTS url text,
+  ADD COLUMN IF NOT EXISTS uploaded_at timestamptz;
+
+UPDATE public.materials
+SET type = COALESCE(type, 'modul'),
+    uploaded_at = COALESCE(uploaded_at, now())
+WHERE type IS NULL OR uploaded_at IS NULL;
+
+ALTER TABLE public.materials
+  ALTER COLUMN type SET NOT NULL,
+  ALTER COLUMN uploaded_at SET NOT NULL,
+  ALTER COLUMN uploaded_at SET DEFAULT now();
+
+DO $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM pg_constraint
+    WHERE conname = 'materials_type_check'
+      AND conrelid = 'public.materials'::regclass
+  ) THEN
+    ALTER TABLE public.materials
+      ADD CONSTRAINT materials_type_check
+      CHECK (type IN ('modul', 'slide', 'catatan'));
+  END IF;
+END $$;
+
 INSERT INTO public.users (id, name, email, username, password_hash, password_salt, role, status, initials, avatar_url, created_at, last_login_at) VALUES
 ('55b872da-5ee1-5801-b184-119b4d7b10bd','Administrator 3IA16','admin@space3ia16.id','admin','199f2d00c4c4d016bedddb423af72f46b21fd22b4eb204dd51c6732f72d0cff8ca79b262def6539c108f121c166735592a2b3fc167ca9253298324ad09a8cdd8','b30a0b199eb7830566baa1d90031b924','admin','active','AD',NULL,'2026-11-01 00:00:00+00',NULL),
 ('4717772a-c1c5-517b-b4d2-f1f6aa1e5efe','Justin Daeli','justindaeli@space3ia16.id','justindaeli','d52dcc9e0ac259c2e8fe6c9b40426ef4dabd3f1f9f28aed57b285472e4984dab2940443661a31b2abe438bd435c1784f3e541bf1daad238077425883f7c9ca60','44a9a14760c300b6f75bf63efa4f567a','user','active','JD',NULL,'2026-11-02 00:00:00+00',NULL),
