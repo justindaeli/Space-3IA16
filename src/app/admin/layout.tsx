@@ -1,15 +1,33 @@
-import type { ReactNode } from "react";
-import { redirect } from "next/navigation";
-import { AdminSidebar } from "@/components/features/admin/AdminSidebar";
-import { getSessionUser } from "@/lib/server/session";
+"use client";
 
-export default async function AdminLayout({ children }: { children: ReactNode }) {
-  const user = await getSessionUser();
-  if (!user) {
-    redirect("/login?from=/admin");
+import type { ReactNode } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { AdminSidebar } from "@/components/features/admin/AdminSidebar";
+import { useAuth } from "@/context/AuthContext";
+
+export default function AdminLayout({ children }: { children: ReactNode }) {
+  const router = useRouter();
+  const { user, isAdmin, isLoading } = useAuth();
+
+  useEffect(() => {
+    if (!isLoading && !user) {
+      router.replace("/login?from=/admin");
+    } else if (!isLoading && !isAdmin) {
+      router.replace("/?error=unauthorized_admin");
+    }
+  }, [isAdmin, isLoading, router, user]);
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-[40vh] items-center justify-center text-sm text-slate-600">
+        Memuat dashboard administrator...
+      </div>
+    );
   }
-  if (user.role !== "admin") {
-    redirect("/?error=unauthorized_admin");
+
+  if (!user || !isAdmin) {
+    return null;
   }
 
   return (
